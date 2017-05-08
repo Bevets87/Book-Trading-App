@@ -7,35 +7,85 @@ nav {
   background: $nav-background-color;
   .nav-logo-container {
     height: 50px;
-    width: 300px;
+    width: auto;
     float: left;
+    cursor: pointer;
     .glyphicon-book {
       font-size: 25px;
       color: white;
       margin-top: 12.5px;
       margin-left: 20px;
+      @media (max-width: 767.99px) {
+        font-size: 20px;
+        margin-top: 15px;
+        margin-left: 5px;
+      }
     }
     h2 {
       display: inline-block;
       color: white;
       margin: 0;
       padding: 0;
+      @media (max-width: 767.99px) {
+        font-size: 20px;
+        margin-top: 15px;
+      }
     }
   }
   .form-inline {
     height: 50px;
     text-align: right;
+    width: auto;
+
+    @media (max-width: 767.99px) {
+      display: none;
+    }
     .form-group {
-      margin-top: 7.5px 10px;
+      margin-top: 7.5px 1px;
       #email {
-        margin-right: 10px;
+        margin-right: 1px;
       }
     }
     button {
-      margin: 7.5px 10px;
+      margin: 7.5px 1px;
       background: white;
     }
   }
+  .hamburger-container {
+    @media (min-width: 768px) {
+      display: none;
+    }
+    height: 50px;
+    float: right;
 
+    .glyphicon-menu-hamburger {
+      font-size: 30px;
+      margin-top: 10px;
+      margin-right: 5px;
+      color: white;
+      cursor: pointer;
 
+    }
+  }
+
+}
+
+.drop-down-menu {
+  position: absolute;
+  top: 50px;
+  left: 0%;
+  width: 100%;
+  z-index: 1;
+  height: auto;
+  background: rgba(67,147,185,0.9);
+  color: white;
+  text-align: center;
+  padding-bottom: 20px;
+  @media (min-width: 768px) {
+    display: none;
+  }
+  h2 {
+    cursor: pointer;
+    border-bottom: 1px solid white;
+  }
 }

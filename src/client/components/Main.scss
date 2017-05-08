@@ -2,26 +2,36 @@ $main-background-color: rgba(50,200,255, 0.1);
 $main-font-color: rgb(67,147,185);
 
 main {
-  height: calc(100vh - 50px);
+  height: 100%;
   background: $main-background-color;
   .about-container {
-    height: auto;
+    height: calc(100vh - 50px);
     h1 {
       color: $main-font-color;
       font-size: 50px;
       text-align: left;
       margin-top: 15vh;
+      @media (max-width: 767px) {
+        margin-top: 10vh;
+      }
+    
     }
     ul {
       li {
         font-size: 25px;
         color: rgb(46,109,164);
         margin-top: 10px;
+        @media (max-width: 767px) {
+          font-size: 20px;
+        }
       }
     }
   }
   .register-container {
-    height: auto;
+    height: calc(100vh - 50px);
+    @media (max-width: 767px) {
+      display: none
+    }
     h1 {
       color: $main-font-color;
       font-size: 50px;

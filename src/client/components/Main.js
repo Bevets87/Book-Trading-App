@@ -49,7 +49,7 @@ class Main extends Component {
             <div className='row'>
               <div className='col-sm-6'>
                 <div className='col-sm-12 about-container'>
-                  <h1>Features</h1>
+                  <h1>About:</h1>
                   <ul>
                     <li>Catalogue your books online</li>
                     <li>See all of the books our users own</li>
@@ -61,7 +61,7 @@ class Main extends Component {
               <div className='col-sm-6'>
                 <div className='col-sm-12 register-container'>
                   <form>
-                    <h1>Register A New Account</h1>
+                    <h1>Register A New Account:</h1>
                     <div className='form-group'>
                       <input placeholder='Email' type='email' className='form-control' id='email' onChange={this.handleInput} />
                     </div>
