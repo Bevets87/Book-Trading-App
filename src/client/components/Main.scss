@@ -1,0 +1,38 @@
+$main-background-color: rgba(50,200,255, 0.1);
+$main-font-color: rgb(67,147,185);
+
+main {
+  height: calc(100vh - 50px);
+  background: $main-background-color;
+  .about-container {
+    height: auto;
+    h1 {
+      color: $main-font-color;
+      font-size: 50px;
+      text-align: left;
+      margin-top: 15vh;
+    }
+    ul {
+      li {
+        font-size: 25px;
+        color: rgb(46,109,164);
+        margin-top: 10px;
+      }
+    }
+  }
+  .register-container {
+    height: auto;
+    h1 {
+      color: $main-font-color;
+      font-size: 50px;
+      text-align: left;
+      margin-top: 15vh;
+    }
+    .form-group {
+      margin-top: 25px;
+    }
+    button {
+      float: right;
+    }
+  }
+}

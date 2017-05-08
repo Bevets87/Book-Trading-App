@@ -1,0 +1,41 @@
+$nav-background-color: rgb(67,147,185);
+
+nav {
+  margin: 0;
+  padding: 0;
+  height: 50px;
+  background: $nav-background-color;
+  .nav-logo-container {
+    height: 50px;
+    width: 300px;
+    float: left;
+    .glyphicon-book {
+      font-size: 25px;
+      color: white;
+      margin-top: 12.5px;
+      margin-left: 20px;
+    }
+    h2 {
+      display: inline-block;
+      color: white;
+      margin: 0;
+      padding: 0;
+    }
+  }
+  .form-inline {
+    height: 50px;
+    text-align: right;
+    .form-group {
+      margin-top: 7.5px 10px;
+      #email {
+        margin-right: 10px;
+      }
+    }
+    button {
+      margin: 7.5px 10px;
+      background: white;
+    }
+  }
+
+
+}
