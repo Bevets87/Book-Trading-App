@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import { connect } from 'react-redux'
+import { userLoginRequest, setUser, setErrors } from '../actions/userActions'
+
+import validateLoginInput from '../../server/shared/validations/login'
+
 import Navbar from './Navbar'
 
 import './Login.scss'
@@ -11,14 +16,17 @@ class Login extends Component {
     this.state = {
       email: '',
       password: '',
-      errors: null
+      clientErrors: {
+        email: '',
+        password: ''
+      }
     }
     this.handleInput = this.handleInput.bind(this)
     this.handleLogin = this.handleLogin.bind(this)
   }
   componentDidMount () {
     window.addEventListener('resize', () => {
-      if (window.innerWidth == '768') {
+      if (window.innerWidth >= '768') {
         this.props.history.push('/')
       }
     })
@@ -38,11 +46,39 @@ class Login extends Component {
       break
     }
   }
+  isValid () {
+    const { errors, isValid } = validateLoginInput(this.state)
+
+    if (!isValid) {
+      this.setState({
+        clientErrors: errors
+      })
+    }
+
+    return isValid
+  }
   handleLogin (event) {
     event.preventDefault()
-    console.log(this.state)
+    this.setState({
+      clientErrors: {}
+    })
+    if (this.isValid()) {
+      userLoginRequest(this.state)
+      .then(
+        response => {
+          localStorage.setItem('token', response.data.token)
+          this.props.dispatch(setUser(response.data.email, response.data.city, response.data.state, true))
+          this.props.history.push('/dashboard')
+        })
+      .catch(
+        error => {
+          this.props.dispatch(setErrors(error.response.data.errors))
+        })
+    }
   }
   render () {
+    const { clientErrors } = this.state
+
     return (
       <div>
         <Navbar />
@@ -50,14 +86,19 @@ class Login extends Component {
           <div className='container-fluid'>
           <div className='mobile-login-container'>
           <form>
-            <h1>Login:</h1>
+            <div className='login-title'>
+              <h1>Login:</h1>
+              <button type='submit' className='btn btn-primary' onClick={this.handleLogin}>Login</button>
+            </div>
             <div className='form-group'>
               <input placeholder='Email' type='email' className='form-control' id='email' onChange={this.handleInput} />
+              {clientErrors.email && <span className='error'>{clientErrors.email}</span>}
             </div>
             <div className='form-group'>
               <input placeholder='Password' type='password' className='form-control' id='pwd' onChange={this.handleInput} />
+              {clientErrors.password && <span className='error'>{clientErrors.password}</span>}
             </div>
-            <button type='submit' className='btn btn-primary' onClick={this.handleRegister}>Login</button>
+
           </form>
           </div>
           </div>
@@ -68,7 +109,16 @@ class Login extends Component {
 }
 
 Login.propTypes = {
-  history: PropTypes.object
+  history: PropTypes.object,
+  serverErrors: PropTypes.object,
+  dispatch: PropTypes.func
 }
 
-export default Login
+const mapStateToProps = (state) => {
+  const { serverErrors } = state.userReducer
+
+  return {
+    serverErrors
+  }
+}
+export default connect(mapStateToProps)(Login)

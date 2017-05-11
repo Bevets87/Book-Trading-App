@@ -6,24 +6,20 @@ main {
   background: $main-background-color;
   .about-container {
     height: calc(100vh - 50px);
-    h1 {
+    h2 {
       color: $main-font-color;
-      font-size: 50px;
+      font-size: 30px;
       text-align: left;
-      margin-top: 15vh;
-      @media (max-width: 767px) {
-        margin-top: 10vh;
-      }
-    
+      margin-top: 50px;
+      margin-left: 50px;
     }
-    ul {
-      li {
-        font-size: 25px;
-        color: rgb(46,109,164);
-        margin-top: 10px;
-        @media (max-width: 767px) {
-          font-size: 20px;
-        }
+    h1 {
+      margin-top: 15vh;
+      font-size: 50px;
+      color: $main-font-color;
+      text-align: left;
+      @media (max-width: 767.99px) {
+        margin-top: 10vh;
       }
     }
   }
@@ -32,17 +28,48 @@ main {
     @media (max-width: 767px) {
       display: none
     }
-    h1 {
-      color: $main-font-color;
-      font-size: 50px;
-      text-align: left;
+    .register-title {
       margin-top: 15vh;
+      height: 100px;
+    h1 {
+        color: $main-font-color;
+        font-size: 50px;
+        display: block;
+
+      }
+      button {
+        display: block;
+        font-size: 25px;
+        height: 50px;
+        margin-top: -5px;
+
+
+      }
     }
     .form-group {
-      margin-top: 25px;
+      border: 1px solid rgba(50,200,255, 0);
+      input {
+        margin-top: 20px;
+      }
+
+      .error {
+        float: right;
+        color: red;
+        padding: 0;
+        margin: 0;
+        font-weight: bold;
+      }
     }
-    button {
-      float: right;
+
+    .location-container {
+      #city {
+        float: left;
+        width: 60%;
+      }
+      #state {
+        float: right;
+        width: 30%;
+      }
     }
   }
 }

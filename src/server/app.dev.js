@@ -8,6 +8,8 @@ import webpackMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
 import webpackConfig from '../../webpack.config.dev'
 
+import user from './routes/user'
+
 let app = express()
 
 const compiler = webpack(webpackConfig)
@@ -23,6 +25,8 @@ app.use(webpackHotMiddleware(compiler))
 app.use(express.static(path.join(__dirname, '../client' )))
 
 app.use(bodyParser.json())
+
+app.use('/', user)
 
 app.get('*', (req,res) => {
   res.sendFile(path.join(__dirname, '../client/index.html'))

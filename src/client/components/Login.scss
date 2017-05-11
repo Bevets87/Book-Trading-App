@@ -9,17 +9,37 @@ main {
     @media (min-width: 768px) {
       display: none;
     }
-    h1 {
-      color: $main-font-color;
-      font-size: 50px;
-      text-align: left;
+    .login-title {
       margin-top: 10vh;
+      height: 100px;
+    h1 {
+        color: $main-font-color;
+        font-size: 50px;
+        display: block;
+
+      }
+      button {
+        display: block;
+        font-size: 25px;
+        height: 50px;
+        margin-top: -5px;
+
+      }
     }
     .form-group {
-      margin-top: 25px;
+      border: 1px solid rgba(50,200,255, 0);
+      input {
+        margin-top: 20px;
+      }
+
+      .error {
+        float: right;
+        color: red;
+        padding: 0;
+        margin: 0;
+        font-weight: bold;
+      }
     }
-    button {
-      float: right;
-    }
+
   }
 }
