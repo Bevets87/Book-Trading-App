@@ -33,6 +33,12 @@ class Login extends Component {
   }
   handleInput (event) {
     event.preventDefault()
+    this.setState({
+      clientErrors: {
+        email: '',
+        password: ''
+      }
+    })
     switch (event.target.id) {
     case 'email':
       this.setState({
@@ -78,7 +84,8 @@ class Login extends Component {
   }
   render () {
     const { clientErrors } = this.state
-
+    const { serverErrors } = this.props
+    console.log(serverErrors)
     return (
       <div>
         <Navbar />

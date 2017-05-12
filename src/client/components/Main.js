@@ -101,6 +101,8 @@ class Main extends Component {
   }
   render () {
     const { clientErrors } = this.state
+    const { serverErrors } = this.props
+    console.log(serverErrors)
 
     return (
       <div>
@@ -136,12 +138,12 @@ class Main extends Component {
                       {clientErrors.passwordConfirmation && <span className='error'>{clientErrors.passwordConfirmation}</span>}
                     </div>
                     <div className='location-container'>
-                      <div id='city' className='form-group'>
-                        <input placeholder='City' type='text' className='form-control' onChange={this.handleInput} />
+                      <div id='city-container' className='form-group'>
+                        <input placeholder='City' type='text' className='form-control' id='city' onChange={this.handleInput} />
                         {clientErrors.city && <span className='error'>{clientErrors.city}</span>}
                       </div>
-                      <div id='state' className='form-group'>
-                        <input placeholder='State' type='text' className='form-control'  onChange={this.handleInput} />
+                      <div id='state-container' className='form-group'>
+                        <input placeholder='State' type='text' className='form-control' id='state'  onChange={this.handleInput} />
                         {clientErrors.state && <span className='error'>{clientErrors.state}</span>}
                       </div>
                     </div>

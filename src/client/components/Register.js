@@ -39,6 +39,15 @@ class Register extends Component {
   }
   handleInput (event) {
     event.preventDefault()
+    this.setState({
+      clientErrors: {
+        email: '',
+        password: '',
+        passwordConfirmation: '',
+        city: '',
+        state: ''
+      }
+    })
     switch (event.target.id) {
     case 'email':
       this.setState({
@@ -99,7 +108,8 @@ class Register extends Component {
   }
   render () {
     const { clientErrors } = this.state
-
+    const { serverErrors } = this.props
+    console.log(serverErrors)
     return (
       <div>
         <Navbar />
@@ -124,12 +134,12 @@ class Register extends Component {
               {clientErrors.passwordConfirmation && <span className='error'>{clientErrors.passwordConfirmation}</span>}
             </div>
             <div className='form-group location-container'>
-              <div id='city'>
-                <input placeholder='City' type='text' className='form-control' onChange={this.handleInput} />
+              <div id='city-container'>
+                <input placeholder='City' type='text' className='form-control' id='city' onChange={this.handleInput} />
                 {clientErrors.city && <span className='error'>{clientErrors.city}</span>}
               </div>
-              <div id='state'>
-                <input placeholder='State' type='text' className='form-control'  onChange={this.handleInput} />
+              <div id='state-container'>
+                <input placeholder='State' type='text' className='form-control' id='state' onChange={this.handleInput} />
                 {clientErrors.state && <span className='error'>{clientErrors.state}</span>}
               </div>
             </div>

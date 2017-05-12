@@ -16,7 +16,7 @@ main {
         color: $main-font-color;
         font-size: 50px;
         display: block;
-        
+
       }
       button {
         display: block;
@@ -42,11 +42,11 @@ main {
     }
 
     .location-container {
-      #city {
+      #city-container {
         float: left;
         width: 60%;
       }
-      #state {
+      #state-container {
         float: right;
         width: 30%;
       }

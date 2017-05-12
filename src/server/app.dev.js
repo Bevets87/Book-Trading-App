@@ -9,6 +9,8 @@ import webpackHotMiddleware from 'webpack-hot-middleware'
 import webpackConfig from '../../webpack.config.dev'
 
 import user from './routes/user'
+import api from './routes/api'
+import book from './routes/book'
 
 let app = express()
 
@@ -25,14 +27,15 @@ app.use(webpackHotMiddleware(compiler))
 app.use(express.static(path.join(__dirname, '../client' )))
 
 app.use(bodyParser.json())
-
 app.use('/', user)
+app.use('/api', api)
+app.use('/books', book)
 
 app.get('*', (req,res) => {
   res.sendFile(path.join(__dirname, '../client/index.html'))
 })
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/ReactStarterApp');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/BookTradingApp');
 
 mongoose.connection.once('open',function(){
   console.log('Connection has been made!')

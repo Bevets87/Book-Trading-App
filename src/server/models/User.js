@@ -17,31 +17,7 @@ const userSchema = new Schema({
   state: {
     type: String,
     required: true
-  },
-  otherUserRequests: [
-    {
-      user: String,
-      city: String,
-      state: String,
-      book: Object,
-      createdAt: {
-        type: Date,
-        expires: '24h',
-        default: Date.now
-      }
-    }
-  ],
-  myRequests: [
-    {
-      book: Object,
-      createdAt: {
-        type: Date,
-        expires: '24h',
-        default: Date.now
-      }
-    }
-  ],
-  myBooks: Array
+  }
 })
 
 const User = mongoose.model('user', userSchema)
