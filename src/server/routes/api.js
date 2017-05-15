@@ -1,10 +1,10 @@
 import express from 'express'
 
-import { handle_get_google_book } from '../controllers/googleBookApiController'
+import { handle_get_api_book } from '../controllers/apiBookController'
 
 let router = express.Router()
 
-router.post('/', handle_get_google_book)
+router.post('/', handle_get_api_book)
 
 
 export default router

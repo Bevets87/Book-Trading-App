@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux'
 import userReducer from './userReducer'
-import googleBookApiReducer from './googleBookApiReducer'
+import apiBookReducer from './apiBookReducer'
 import bookReducer from './bookReducer'
 
 
 export default combineReducers({
   userReducer,
-  googleBookApiReducer,
+  apiBookReducer,
   bookReducer
 })

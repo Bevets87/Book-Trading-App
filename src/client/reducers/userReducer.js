@@ -3,8 +3,9 @@ import { SET_USER, SET_USER_ERRORS } from '../actions/userActions'
 const DEFAULT_STATE = {
   isAuthenticated: false,
   user: null,
+  userID: null,
   city: null,
-  state: null,
+  stateOfCity: null,
   serverErrors: {}
 }
 
@@ -15,8 +16,9 @@ const setUser = (state, action) => {
     {
       isAuthenticated: action.isAuthenticated,
       user: action.user,
+      userID: action.userID,
       city: action.city,
-      state: action.state,
+      stateOfCity: action.stateOfCity,
       serverErrors: {}
     }
   )
@@ -29,8 +31,9 @@ const setUserErrors = (state, action) => {
     {
       serverErrors: action.serverErrors,
       user: null,
+      userID: null,
       city: null,
-      state: null,
+      stateOfCity: null,
       isAuthenticated: false
     }
   )

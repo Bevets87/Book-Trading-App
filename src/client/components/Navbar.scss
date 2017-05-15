@@ -89,6 +89,25 @@ nav {
     }
   }
 
+  .auth-nav-menu {
+    display: block;
+    height: 80px;
+    padding: 0;
+    text-align: right;
+    @media(max-width: 767.99px) {
+      display: none;
+    }
+    li {
+      display: inline-block;
+      font-size: 20px;
+      margin-top: 30px;
+      color: white;
+      margin-right: 30px;
+      font-weight: bold;
+      cursor: pointer;
+
+    }
+  }
 }
 
 .drop-down-menu {

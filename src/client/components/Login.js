@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { connect } from 'react-redux'
-import { userLoginRequest, setUser, setErrors } from '../actions/userActions'
+import { userLoginRequest, setUser, setUserErrors } from '../actions/userActions'
 
 import validateLoginInput from '../../server/shared/validations/login'
 
@@ -73,12 +73,12 @@ class Login extends Component {
       .then(
         response => {
           localStorage.setItem('token', response.data.token)
-          this.props.dispatch(setUser(response.data.email, response.data.city, response.data.state, true))
-          this.props.history.push('/dashboard')
+          this.props.dispatch(setUser(response.data.email, response.data.userID, response.data.city, response.data.state, true))
+          this.props.history.push('/my-books')
         })
       .catch(
         error => {
-          this.props.dispatch(setErrors(error.response.data.errors))
+          this.props.dispatch(setUserErrors(error.response.data.errors))
         })
     }
   }

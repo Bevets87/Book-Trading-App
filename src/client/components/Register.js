@@ -97,8 +97,8 @@ class Register extends Component {
       .then(
         response => {
           localStorage.setItem('token', response.data.token)
-          this.props.dispatch(setUser(response.data.email, response.data.city, response.data.state, true))
-          this.props.history.push('/dashboard')
+          this.props.dispatch(setUser(response.data.email, response.data.userID, response.data.city, response.data.state, true))
+          this.props.history.push('/my-books')
         })
       .catch(
         error => {

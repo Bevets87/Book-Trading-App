@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { connect } from 'react-redux'
-import { userRegistrationRequest, setUser, setErrors } from '../actions/userActions'
+import { userRegistrationRequest, userLoginRequest, setUser, setUserErrors } from '../actions/userActions'
 
 import validateRegistrationInput from '../../server/shared/validations/register'
 
@@ -28,9 +28,10 @@ class Main extends Component {
       }
     }
     this.handleRegister = this.handleRegister.bind(this)
-    this.handleInput = this.handleInput.bind(this)
+    this.handleRegisterInput = this.handleRegisterInput.bind(this)
+    this.handleUserLoginRequest = this.handleUserLoginRequest.bind(this)
   }
-  isValid () {
+  isRegistrationValid () {
     const { errors, isValid } = validateRegistrationInput(this.state)
 
     if (!isValid) {
@@ -46,21 +47,21 @@ class Main extends Component {
     this.setState({
       clientErrors: {}
     })
-    if (this.isValid()) {
+    if (this.isRegistrationValid()) {
       userRegistrationRequest(this.state)
       .then(
         response => {
           localStorage.setItem('token', response.data.token)
-          this.props.dispatch(setUser(response.data.email, response.data.city, response.data.state, true))
-          this.props.history.push('/dashboard')
+          this.props.dispatch(setUser(response.data.email, response.data.userID, response.data.city, response.data.state, true))
+          this.props.history.push('/my-books')
         })
       .catch(
         error => {
-          this.props.dispatch(setErrors(error.response.data.errors))
+          this.props.dispatch(setUserErrors(error.response.data.errors))
         })
     }
   }
-  handleInput (event) {
+  handleRegisterInput (event) {
     this.setState({
       clientErrors: {
         email: '',
@@ -99,6 +100,19 @@ class Main extends Component {
       break
     }
   }
+  handleUserLoginRequest (state) {
+    userLoginRequest(state)
+    .then(
+      response => {
+        localStorage.setItem('token', response.data.token)
+        this.props.dispatch(setUser(response.data.email, response.data.userID, response.data.city, response.data.state, true))
+        this.props.history.push('/my-books')
+      })
+    .catch(
+      error => {
+        this.props.dispatch(setUserErrors(error.response.data.errors))
+      })
+  }
   render () {
     const { clientErrors } = this.state
     const { serverErrors } = this.props
@@ -106,7 +120,7 @@ class Main extends Component {
 
     return (
       <div>
-        <Navbar />
+        <Navbar userLoginRequest={this.handleUserLoginRequest} />
         <main>
           <div className='container-fluid'>
             <div className='row'>
@@ -126,24 +140,24 @@ class Main extends Component {
                       <button type='submit' className='btn btn-primary' onClick={this.handleRegister}>Register</button>
                     </div>
                     <div className='form-group'>
-                      <input placeholder='Email' type='email' className='form-control' id='email' onChange={this.handleInput} />
+                      <input placeholder='Email' type='email' className='form-control' id='email' onChange={this.handleRegisterInput} />
                       {clientErrors.email && <span className='error'>{clientErrors.email}</span>}
                     </div>
                     <div className='form-group'>
-                      <input placeholder='Password' type='password' className='form-control' id='pwd' onChange={this.handleInput} />
+                      <input placeholder='Password' type='password' className='form-control' id='pwd' onChange={this.handleRegisterInput} />
                       {clientErrors.password && <span className='error'>{clientErrors.password}</span>}
                     </div>
                     <div className='form-group'>
-                      <input placeholder='Password Confirmation' type='password' className='form-control' id='pwd-confirmation' onChange={this.handleInput} />
+                      <input placeholder='Password Confirmation' type='password' className='form-control' id='pwd-confirmation' onChange={this.handleRegisterInput} />
                       {clientErrors.passwordConfirmation && <span className='error'>{clientErrors.passwordConfirmation}</span>}
                     </div>
                     <div className='location-container'>
                       <div id='city-container' className='form-group'>
-                        <input placeholder='City' type='text' className='form-control' id='city' onChange={this.handleInput} />
+                        <input placeholder='City' type='text' className='form-control' id='city' onChange={this.handlRegisterInput} />
                         {clientErrors.city && <span className='error'>{clientErrors.city}</span>}
                       </div>
                       <div id='state-container' className='form-group'>
-                        <input placeholder='State' type='text' className='form-control' id='state'  onChange={this.handleInput} />
+                        <input placeholder='State' type='text' className='form-control' id='state'  onChange={this.handleRegisterInput} />
                         {clientErrors.state && <span className='error'>{clientErrors.state}</span>}
                       </div>
                     </div>
@@ -165,7 +179,7 @@ Main.propTypes = {
 }
 
 const mapStateToProps = (state) => {
-  const { serverErrors } = state.userReducer
+  const { serverErrors,  } = state.userReducer
 
   return {
     serverErrors

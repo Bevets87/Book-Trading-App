@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { connect } from 'react-redux'
-import { userLoginRequest, setUser, setErrors } from '../actions/userActions'
 
 import validateLoginInput from '../../server/shared/validations/login'
 
@@ -22,7 +21,7 @@ class Navbar extends Component {
       },
       dropDownMenu: false
     }
-    this.handleLogin = this.handleLogin.bind(this)
+    this.handleNavLogin = this.handleNavLogin.bind(this)
     this.handleInput = this.handleInput.bind(this)
     this.handleDropDownMenu = this.handleDropDownMenu.bind(this)
   }
@@ -44,23 +43,13 @@ class Navbar extends Component {
 
     return isValid
   }
-  handleLogin (event) {
+  handleNavLogin (event) {
     event.preventDefault()
     this.setState({
       clientErrors: {}
     })
     if (this.isValid()) {
-      userLoginRequest(this.state)
-      .then(
-        response => {
-          localStorage.setItem('token', response.data.token)
-          this.props.dispatch(setUser(response.data.email, response.data.city, response.data.state, true))
-          this.props.history.push('/dashboard')
-        })
-      .catch(
-        error => {
-          this.props.dispatch(setErrors(error.response.data.errors))
-        })
+      this.props.userLoginRequest(this.state)
     }
   }
   handleInput (event) {
@@ -86,51 +75,70 @@ class Navbar extends Component {
   }
   render () {
     const { clientErrors } = this.state
-    const { serverErrors } = this.props
-    console.log(serverErrors)
-
-    return (
-      <nav>
-        <Link to='/'>
-          <div className='nav-logo-container'>
-            <span className='glyphicon glyphicon-book'></span>
-            <h2>BookTrader</h2>
+    const { isAuthenticated } = this.props
+    if (isAuthenticated) {
+      return (
+        <nav>
+          <Link to='/'>
+            <div className='nav-logo-container'>
+              <span className='glyphicon glyphicon-book'></span>
+              <h2>BookTrader</h2>
+            </div>
+          </Link>
+          <ul className='auth-nav-menu'>
+            <li>All Books</li>
+            <li>My Books</li>
+            <li>Manage Trades</li>
+            <li>Account</li>
+            <li>Logout</li>
+          </ul>
+          <div className='hamburger-container' onClick={this.handleDropDownMenu}>
+            <span className='glyphicon glyphicon-menu-hamburger'></span>
           </div>
-        </Link>
-        <form className='form-inline'>
-          <div className='form-group'>
-            <input type='email' className='form-control' id='email' placeholder='Email' onChange={this.handleInput} />
-            {clientErrors.email && <span className='error'>{clientErrors.email}</span>}
+          {this.state.dropDownMenu && <div className='drop-down-menu'><Link to='/all-books'><h2>All Books</h2></Link><Link to='/my-books'><h2>My Books</h2></Link><Link to='/trades'><h2>Manage Trades</h2></Link><Link to='/account'><h2>Account</h2></Link><Link to='/logout'><h2>Logout</h2></Link></div>}
+        </nav>
+      )
+    } else {
+      return (
+        <nav>
+          <Link to='/'>
+            <div className='nav-logo-container'>
+              <span className='glyphicon glyphicon-book'></span>
+              <h2>BookTrader</h2>
+            </div>
+          </Link>
+          <form className='form-inline'>
+            <div className='form-group'>
+              <input type='email' className='form-control' id='email' placeholder='Email' onChange={this.handleInput} />
+              {clientErrors.email && <span className='error'>{clientErrors.email}</span>}
+            </div>
+            <div className='form-group'>
+              <input type='password' className='form-control' id='pwd' placeholder='Password' onChange={this.handleInput} />
+              {clientErrors.password && <span className='error'>{clientErrors.password}</span>}
+            </div>
+            <button type='submit' className='btn' onClick={this.handleNavLogin}>Login</button>
+          </form>
+          <div className='hamburger-container' onClick={this.handleDropDownMenu}>
+            <span className='glyphicon glyphicon-menu-hamburger'></span>
           </div>
-          <div className='form-group'>
-            <input type='password' className='form-control' id='pwd' placeholder='Password' onChange={this.handleInput} />
-            {clientErrors.password && <span className='error'>{clientErrors.password}</span>}
-          </div>
-          <button type='submit' className='btn' onClick={this.handleLogin}>Login</button>
-        </form>
-        <div className='hamburger-container' onClick={this.handleDropDownMenu}>
-          <span className='glyphicon glyphicon-menu-hamburger'></span>
-        </div>
-        {this.state.dropDownMenu && <div className='drop-down-menu'><Link to='/'><h2>About</h2></Link><Link to='/login'><h2>Login</h2></Link><Link to='/register'><h2>Register</h2></Link></div>}
-      </nav>
-    )
+          {this.state.dropDownMenu && <div className='drop-down-menu'><Link to='/'><h2>About</h2></Link><Link to='/login'><h2>Login</h2></Link><Link to='/register'><h2>Register</h2></Link></div>}
+        </nav>
+      )
+    }
   }
 }
 
 Navbar.propTypes = {
-  history: PropTypes.object,
   serverErrors: PropTypes.object,
-  dispatch: PropTypes.func,
-  isAuthenticated: PropTypes.bool
+  isAuthenticated: PropTypes.bool,
+  userLoginRequest: PropTypes.func
 }
 
 const mapStateToProps = (state) => {
-  const { isAuthenticated, serverErrors } = state.userReducer
-
+  const { serverErrors, isAuthenticated } = state.userReducer
   return {
-    isAuthenticated,
-    serverErrors
+    serverErrors,
+    isAuthenticated
   }
 }
-
 export default connect(mapStateToProps)(Navbar)

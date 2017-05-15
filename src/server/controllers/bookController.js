@@ -14,15 +14,16 @@ export const handle_get_books = (req, res) => {
 }
 
 export const handle_create_book = (req, res) => {
-  const { bookFromClient } = req.body
-  const { title, cover, ownerID } = bookFromClient
+  const { title, author, cover, ownerID } = req.body
   let book = new Book({
     title: title,
+    author: author,
     cover: cover,
     ownerID: ownerID
   })
   book.save((err, book) => {
   if (err) return console.error(err)
+    console.log(book)
     res.json({book: book})
   })
 }
@@ -47,10 +48,11 @@ export const handle_update_book = (req, res) => {
 }
 
 export const handle_delete_book = (req, res) => {
-  const { bookFromClient } = req.body
-  const { _id } = bookFromClient
-  Book.findOneAndRemove({_id: _id}, (err, book) => {
+  const { bookID } = req.body
+  console.log(req.body)
+  Book.findOneAndRemove({_id: bookID}, (err, book) => {
     if (err) return console.error(err)
+    console.log(book)
     res.json({book: book})
   })
 }

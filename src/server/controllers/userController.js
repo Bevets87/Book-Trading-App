@@ -35,6 +35,7 @@ export const handle_user_registration = function (req, res) {
           console.log(user)
           res.status(201).json({
             email: user.email,
+            userID: user._id,
             city: user.city,
             state: user.state,
             token: createToken(user.email)
@@ -56,8 +57,10 @@ export const handle_user_login = function (req, res) {
   if(isValid){
     User.findOne({email: email}, (err, user) => {
       if(user && bcrypt.compareSync(password, user.password)) {
+
         res.status(200).json({
           email: user.email,
+          userID: user._id,
           city: user.city,
           state: user.state,
           token: createToken(user.email)
