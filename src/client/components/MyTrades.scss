@@ -1,0 +1,27 @@
+$main-background-color: rgba(50,200,255, 0.1);
+$main-font-color: rgb(67,147,185);
+
+.my-trades-container {
+  height: calc(100vh - 80px);
+  background: $main-background-color;
+  color: $main-font-color;
+  h1 {
+    text-align: left;
+    display: block;
+    margin-top: 50px;
+    font-size: 60px;
+  }
+  .col-sm-4 {
+    h2 {
+      font-weight: bold;
+      text-align: center;
+    }
+    .col-sm-12 {
+      background: white;
+      height: 55vh;
+      border: 2px solid $main-font-color;
+      border-radius: 20px;
+      overflow-y: scroll;
+    }
+  }
+}

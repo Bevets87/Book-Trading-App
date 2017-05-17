@@ -1,13 +1,13 @@
 $main-font-color: rgb(67,147,185);
 $main-background-color: rgba(50,200,255, 0.1);
 
-main {
-  height: 100%;
+.main-container {
+  height: calc(100vh - 50px);
   background: $main-background-color;
   .mobile-register-container {
-    height: calc(100vh - 50px);
+
     @media (min-width: 768px) {
-      display: none
+      display: none;
     }
     .register-title {
       margin-top: 10vh;

@@ -17,7 +17,9 @@ const userSchema = new Schema({
   state: {
     type: String,
     required: true
-  }
+  },
+  firstName: String,
+  lastName: String
 })
 
 const User = mongoose.model('user', userSchema)

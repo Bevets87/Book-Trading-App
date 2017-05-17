@@ -7,7 +7,12 @@ const { JWT_SECRET } = config
 import Book from '../models/Book'
 
 export const handle_get_books = (req, res) => {
-  Book.find((err, books) => {
+  Book.find()
+  .populate('ownerID')
+  .populate('borrowerID')
+  .populate('requests.userID')
+  .populate('requests.userBookForTradeID')
+  .exec((err, books) => {
     if (err) return console.error(err)
     res.json({books: books})
   })
@@ -30,18 +35,27 @@ export const handle_create_book = (req, res) => {
 
 
 export const handle_update_book = (req, res) => {
-  const { bookFromClient } = req.body
-  const { _id, userID, userBookForTradeID } = bookFromClient
-  Book.findOne({_id: _id}, (err, book) => {
+  const {requestedBookID, userID, userBookForTradeID  } = req.body
+  Book.findOne({_id: requestedBookID}, (err, book) => {
     if (err) return console.error(err)
-    let bookRequests = book.requests.slice()
-    bookRequests.push({
-      userID: userID,
-      userBookForTradeID: userBookForTradeID
-    })
-    book.requests = bookRequests
+    if (book.requests.length > 0) {
+      let bookRequests = book.requests.slice()
+      bookRequests.push({
+        userID: userID,
+        userBookForTradeID: userBookForTradeID
+      })
+      book.requests = bookRequests
+    } else {
+      let bookRequests = []
+      bookRequests.push({
+        userID: userID,
+        userBookForTradeID: userBookForTradeID
+      })
+      book.requests = bookRequests
+    }
     book.save((err, book) => {
       if (err) return console.error(err)
+      console.log(book)
       res.json({book: book})
     })
   })

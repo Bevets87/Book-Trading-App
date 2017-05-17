@@ -98,7 +98,7 @@ class Register extends Component {
         response => {
           localStorage.setItem('token', response.data.token)
           this.props.dispatch(setUser(response.data.email, response.data.userID, response.data.city, response.data.state, true))
-          this.props.history.push('/my-books')
+          this.props.history.push('/all-books')
         })
       .catch(
         error => {
@@ -113,8 +113,7 @@ class Register extends Component {
     return (
       <div>
         <Navbar />
-        <main>
-          <div className='container-fluid'>
+        <div className='container-fluid main-container'>
           <div className='mobile-register-container'>
           <form>
             <div className='register-title'>
@@ -145,8 +144,7 @@ class Register extends Component {
             </div>
           </form>
           </div>
-          </div>
-        </main>
+        </div>
       </div>
     )
   }

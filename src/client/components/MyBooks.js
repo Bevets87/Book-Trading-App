@@ -66,6 +66,9 @@ class MyBooks extends Component {
   handleRemoveApiBook (event) {
     event.preventDefault()
     this.props.dispatch(setApiBook(null))
+    this.setState({
+      searchTerm: ''
+    })
   }
   render () {
     const { isAuthenticated, apiBook, books } = this.props
@@ -75,15 +78,15 @@ class MyBooks extends Component {
         <div>
           <Navbar />
           <div className='container-fluid my-books-container'>
-            <h1><span className='glyphicon glyphicon-book'></span>MyCollection</h1>
+            <h1><span className='glyphicon glyphicon-book'></span>MyBooks</h1>
             <div className='row my-books'>
               {books.map(book => {
                 return (
                   <div className='col-sm-2'>
                     <div className='col-sm-12 my-book'>
-                      <h5 className='title'>{book.title}</h5>
+                      <h4 className='title'>{book.title}</h4>
                       <img src={book.cover} />
-                      <button value={book._id} onClick={this.handleRemoveBook} className='btn btn-primary'>Remove Book</button>
+                      <button value={book._id} onClick={this.handleRemoveBook} className='btn btn-danger'>Remove Book</button>
                     </div>
                   </div>
                 )
@@ -93,12 +96,14 @@ class MyBooks extends Component {
               <input type='text' placeholder='Search for a book' value={this.state.searchTerm} onChange={this.handleSearch} />
               <button className='btn btn-primary' onClick={this.handleSubmitSearch} value={this.state.searchTerm}>Search</button>
               {apiBook && <div className='api-book-container'>
-                            <h1 className='title'>{apiBook.title}</h1>
-                            <h3 className='author'>by: {apiBook.author}</h3>
-                            <img src={apiBook.cover}/>
-                            <div className='button-container'>
-                              <button onClick={this.handleAddBook} className='btn btn-primary'>Add to collection</button>
-                              <button onClick={this.handleRemoveApiBook} className='btn btn-primary'>Not what I was looking for...</button>
+                            <div className='api-book'>
+                              <h1 className='title'>{apiBook.title}</h1>
+                              <h3 className='author'>by: {apiBook.author}</h3>
+                              <img src={apiBook.cover}/>
+                              <div className='button-container'>
+                                <button onClick={this.handleAddBook} className='btn btn-primary'>Add to collection</button>
+                                <button onClick={this.handleRemoveApiBook} className='btn btn-danger'>Not what I was looking for...</button>
+                              </div>
                             </div>
                           </div>}
             </div>
@@ -127,7 +132,7 @@ const mapStateToProps = (state) => {
   const { isAuthenticated, userID } = state.userReducer
   const { apiBook } = state.apiBookReducer
   const { books } = state.bookReducer
-  const myBooks = books.filter( book => book.ownerID == userID)
+  const myBooks = books.filter( book => book.ownerID._id == userID)
 
   return {
     isAuthenticated,

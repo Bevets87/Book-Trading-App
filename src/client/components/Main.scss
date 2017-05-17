@@ -1,11 +1,14 @@
 $main-background-color: rgba(50,200,255, 0.1);
 $main-font-color: rgb(67,147,185);
 
-main {
-  height: 100%;
+.main-container {
+  height: calc(100vh - 80px);
   background: $main-background-color;
-  .about-container {
+  @media (max-width: 767.99px) {
     height: calc(100vh - 50px);
+  }
+  .about-container {
+
     h2 {
       color: $main-font-color;
       font-size: 30px;
@@ -24,7 +27,7 @@ main {
     }
   }
   .register-container {
-    height: calc(100vh - 50px);
+
     @media (max-width: 767px) {
       display: none
     }

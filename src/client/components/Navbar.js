@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { connect } from 'react-redux'
+import { setUser } from '../actions/userActions'
 
 import validateLoginInput from '../../server/shared/validations/login'
 
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 import './Navbar.scss'
 
@@ -24,6 +25,13 @@ class Navbar extends Component {
     this.handleNavLogin = this.handleNavLogin.bind(this)
     this.handleInput = this.handleInput.bind(this)
     this.handleDropDownMenu = this.handleDropDownMenu.bind(this)
+    this.handleLogout = this.handleLogout.bind(this)
+  }
+  handleLogout (event) {
+    event.preventDefault()
+    localStorage.removeItem('token')
+    this.props.dispatch(setUser(null, null, null, null, false))
+    this.props.history.push('/')
   }
   handleDropDownMenu (event) {
     event.preventDefault()
@@ -79,23 +87,23 @@ class Navbar extends Component {
     if (isAuthenticated) {
       return (
         <nav>
-          <Link to='/'>
+          <Link to='/all-books'>
             <div className='nav-logo-container'>
               <span className='glyphicon glyphicon-book'></span>
               <h2>BookTrader</h2>
             </div>
           </Link>
           <ul className='auth-nav-menu'>
-            <li>All Books</li>
-            <li>My Books</li>
-            <li>Manage Trades</li>
+            <Link to='/all-books'><li>All Books</li></Link>
+            <Link to='/my-books'><li>My Books</li></Link>
+            <Link to='/my-trades'><li>My Trades</li></Link>
             <li>Account</li>
-            <li>Logout</li>
+            <li onClick={this.handleLogout}>Logout</li>
           </ul>
           <div className='hamburger-container' onClick={this.handleDropDownMenu}>
             <span className='glyphicon glyphicon-menu-hamburger'></span>
           </div>
-          {this.state.dropDownMenu && <div className='drop-down-menu'><Link to='/all-books'><h2>All Books</h2></Link><Link to='/my-books'><h2>My Books</h2></Link><Link to='/trades'><h2>Manage Trades</h2></Link><Link to='/account'><h2>Account</h2></Link><Link to='/logout'><h2>Logout</h2></Link></div>}
+          {this.state.dropDownMenu && <div className='drop-down-menu'><Link to='/all-books'><h2>All Books</h2></Link><Link to='/my-books'><h2>My Books</h2></Link><Link to='/my-trades'><h2>My Trades</h2></Link><Link to='/account'><h2>Account</h2></Link><h2 onClick={this.handleLogout}>Logout</h2></div>}
         </nav>
       )
     } else {
@@ -131,7 +139,9 @@ class Navbar extends Component {
 Navbar.propTypes = {
   serverErrors: PropTypes.object,
   isAuthenticated: PropTypes.bool,
-  userLoginRequest: PropTypes.func
+  userLoginRequest: PropTypes.func,
+  dispatch: PropTypes.func,
+  history: PropTypes.object
 }
 
 const mapStateToProps = (state) => {
@@ -141,4 +151,4 @@ const mapStateToProps = (state) => {
     isAuthenticated
   }
 }
-export default connect(mapStateToProps)(Navbar)
+export default connect(mapStateToProps)(withRouter(Navbar))

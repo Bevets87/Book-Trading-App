@@ -28,7 +28,8 @@ export const handle_user_registration = function (req, res) {
           password: passwordDigest,
           email: email,
           city: city,
-          state: state
+          state: state,
+          fullName: ''
         })
         user.save((err, user) => {
           if(err) return console.error(err)
@@ -38,6 +39,7 @@ export const handle_user_registration = function (req, res) {
             userID: user._id,
             city: user.city,
             state: user.state,
+            fullName: user.fullName,
             token: createToken(user.email)
           })
         })
@@ -63,6 +65,7 @@ export const handle_user_login = function (req, res) {
           userID: user._id,
           city: user.city,
           state: user.state,
+          fullName: user.fullName,
           token: createToken(user.email)
         })
       } else if (!user) {

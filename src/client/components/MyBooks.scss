@@ -8,6 +8,7 @@ $main-font-color: rgb(67,147,185);
   height: calc(100vh - 80px);
 
   h1 {
+
     text-align: left;
     display: block;
     margin-top: 50px;
@@ -27,7 +28,8 @@ $main-font-color: rgb(67,147,185);
     border-radius: 10px;
     margin-top: 20px;
     height: 275px;
-    h5 {
+    overflow-y: scroll;
+    h4 {
       font-weight: bold;
     }
     button {
@@ -65,32 +67,38 @@ $main-font-color: rgb(67,147,185);
       z-index: 1;
       width: 100%;
       height: 100vh;
-      background: rgba(0,0,0,0.9);
-      h1 {
-        text-align: center;
-        margin-top: 10vh;
-        padding: 0;
-      }
-      h3 {
-        margin: 0;
-        padding: 0;
-      }
-      img {
-        display: block;
-        margin: 10px auto;
-        height: 300px;
-        width: 200px;
-      }
-      .button-container {
-        button {
-          font-size: 20px;
-          margin-top: 10px;
-          margin-bottom: 10px;
-          margin-left: 10px;
-          margin-right: 10px;
+      background: rgba(0,0,0,0.3);
+      .api-book {
+        height: auto;
+        width: 50%;
+        margin: 0 auto;
+        background: rgba(0,0,0,0.8);
+        border-radius: 20px;
+        h1 {
+          text-align: center;
+          margin-top: 10vh;
+          padding: 0;
+        }
+        h3 {
+          margin: 0;
+          padding: 0;
+        }
+        img {
+          display: block;
+          margin: 10px auto;
+          height: 300px;
+          width: 200px;
+        }
+        .button-container {
+          button {
+            font-size: 20px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            margin-left: 10px;
+            margin-right: 10px;
+          }
         }
       }
     }
-
   }
 }

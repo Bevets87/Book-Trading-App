@@ -3,31 +3,12 @@ const Schema = mongoose.Schema
 
 const bookSchema = new Schema({
   title: String,
+  author: String,
   cover: String,
-  ownerID: {
+  owner: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  },
-  borrower: {
-    userID: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User'
-    },
-    originDate: { type: Date, default: Date.now }
-  },
-  requests: [
-    {
-      userID: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-      },
-      userBookForTradeID: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Book'
-      },
-      originDate: { type: Date, default: Date.now }
-    }
-  ]
+    ref: 'user'
+  }
 })
 
 const Book = mongoose.model('book', bookSchema)

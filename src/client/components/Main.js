@@ -48,12 +48,13 @@ class Main extends Component {
       clientErrors: {}
     })
     if (this.isRegistrationValid()) {
+      console.log(this.state)
       userRegistrationRequest(this.state)
       .then(
         response => {
           localStorage.setItem('token', response.data.token)
           this.props.dispatch(setUser(response.data.email, response.data.userID, response.data.city, response.data.state, true))
-          this.props.history.push('/my-books')
+          this.props.history.push('/all-books')
         })
       .catch(
         error => {
@@ -106,7 +107,7 @@ class Main extends Component {
       response => {
         localStorage.setItem('token', response.data.token)
         this.props.dispatch(setUser(response.data.email, response.data.userID, response.data.city, response.data.state, true))
-        this.props.history.push('/my-books')
+        this.props.history.push('/all-books')
       })
     .catch(
       error => {
@@ -121,8 +122,7 @@ class Main extends Component {
     return (
       <div>
         <Navbar userLoginRequest={this.handleUserLoginRequest} />
-        <main>
-          <div className='container-fluid'>
+        <div className='container-fluid main-container'>
             <div className='row'>
               <div className='col-sm-6'>
                 <div className='col-sm-12 about-container'>
@@ -153,7 +153,7 @@ class Main extends Component {
                     </div>
                     <div className='location-container'>
                       <div id='city-container' className='form-group'>
-                        <input placeholder='City' type='text' className='form-control' id='city' onChange={this.handlRegisterInput} />
+                        <input placeholder='City' type='text' className='form-control' id='city' onChange={this.handleRegisterInput} />
                         {clientErrors.city && <span className='error'>{clientErrors.city}</span>}
                       </div>
                       <div id='state-container' className='form-group'>
@@ -166,7 +166,6 @@ class Main extends Component {
               </div>
             </div>
           </div>
-        </main>
       </div>
     )
   }
