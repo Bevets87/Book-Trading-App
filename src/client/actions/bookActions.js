@@ -34,7 +34,3 @@ export const createBook = (book) => {
 export const deleteBook = (book) => {
   return axios.post('/books/delete', book)
 }
-
-export const updateBook = (book) => {
-  return axios.post('/books/update', book)
-}

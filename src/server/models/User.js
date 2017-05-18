@@ -1,6 +1,34 @@
 import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 
+const tradeRequest = new Schema({
+  to: String,
+  from: String,
+  getBook: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'book'
+  },
+  giveBook: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'book'
+  }
+})
+
+const tradeResponse = new Schema({
+  to: String,
+  from: String,
+  getBook: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'book'
+  },
+  giveBook: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'book'
+  },
+  answer: Boolean
+}
+
+
 const userSchema = new Schema({
   email: {
     type: String,
@@ -18,8 +46,9 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
-  firstName: String,
-  lastName: String
+  fullName: String,
+  tradeRequests: [ tradeRequest ],
+  tradeResponses: [ tradeResponse ]
 })
 
 const User = mongoose.model('user', userSchema)

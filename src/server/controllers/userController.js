@@ -15,7 +15,6 @@ const createToken = function(username) {
 }
 
 export const handle_user_registration = function (req, res) {
-  console.log(req.body)
   const { errors, isValid } = validateRegistrationInput (req.body)
   const { password, email, city, state } = req.body
 
@@ -36,7 +35,7 @@ export const handle_user_registration = function (req, res) {
           console.log(user)
           res.status(201).json({
             email: user.email,
-            userID: user._id,
+            _id: user._id,
             city: user.city,
             state: user.state,
             fullName: user.fullName,
@@ -62,7 +61,7 @@ export const handle_user_login = function (req, res) {
 
         res.status(200).json({
           email: user.email,
-          userID: user._id,
+          _id: user._id,
           city: user.city,
           state: user.state,
           fullName: user.fullName,

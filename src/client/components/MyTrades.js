@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+
+
 import { connect } from 'react-redux'
 
 import Navbar from './Navbar'
@@ -54,37 +56,16 @@ class MyTrades extends Component {
 }
 
 MyTrades.propTypes = {
-  isAuthenticated: PropTypes.bool,
-  myTradeRequests: PropTypes.array
+  isAuthenticated: PropTypes.bool
+
 
 }
 
 const mapStateToProps = (state) => {
-  const { isAuthenticated, user } = state.userReducer
-  const { books } = state.bookReducer
-  const allBooksWithTradeRequests = books.filter(book => {
-    if (book.requests.length > 0) {
-      return book
-    }
-  })
-  console.log(allBooksWithTradeRequests)
-  const myTradeRequests = allBooksWithTradeRequests.requests.filter(request => {
-    if (request.userID.email === user) {
-      return request
-    }
-  })
-
-  console.log(myTradeRequests)
-/*  const friendsTradeRequests = books.filter(book => {
-    if (book.requests.length > 0 && book.ownerID.email === user) {
-
-    }
-  }) */
+  const { isAuthenticated } = state.userReducer
 
   return {
-    isAuthenticated,
-    myTradeRequests
-
+    isAuthenticated
   }
 }
 

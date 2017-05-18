@@ -48,12 +48,18 @@ class Main extends Component {
       clientErrors: {}
     })
     if (this.isRegistrationValid()) {
-      console.log(this.state)
       userRegistrationRequest(this.state)
       .then(
         response => {
+          const user = {
+            email: response.data.email,
+            _id: response.data._id,
+            city: response.data.city,
+            state: response.data.state,
+            fullName: response.data.fullName
+          }
           localStorage.setItem('token', response.data.token)
-          this.props.dispatch(setUser(response.data.email, response.data.userID, response.data.city, response.data.state, true))
+          this.props.dispatch(setUser(user, true))
           this.props.history.push('/all-books')
         })
       .catch(
@@ -105,8 +111,15 @@ class Main extends Component {
     userLoginRequest(state)
     .then(
       response => {
+        const user = {
+          email: response.data.email,
+          _id: response.data._id,
+          city: response.data.city,
+          state: response.data.state,
+          fullName: response.data.fullName
+        }
         localStorage.setItem('token', response.data.token)
-        this.props.dispatch(setUser(response.data.email, response.data.userID, response.data.city, response.data.state, true))
+        this.props.dispatch(setUser(user, true))
         this.props.history.push('/all-books')
       })
     .catch(

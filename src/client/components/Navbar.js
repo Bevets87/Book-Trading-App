@@ -30,7 +30,7 @@ class Navbar extends Component {
   handleLogout (event) {
     event.preventDefault()
     localStorage.removeItem('token')
-    this.props.dispatch(setUser(null, null, null, null, false))
+    this.props.dispatch(setUser(null, false))
     this.props.history.push('/')
   }
   handleDropDownMenu (event) {

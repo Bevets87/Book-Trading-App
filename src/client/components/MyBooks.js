@@ -35,7 +35,7 @@ class MyBooks extends Component {
   handleAddBook (event) {
     event.preventDefault()
     let book = this.props.apiBook
-    book.ownerID = this.props.userID
+    book.owner = this.props.user._id
     createBook(book)
     .then(
       () => {
@@ -72,7 +72,7 @@ class MyBooks extends Component {
   }
   render () {
     const { isAuthenticated, apiBook, books } = this.props
-    console.log(books)
+
     if (isAuthenticated) {
       return (
         <div>
@@ -124,19 +124,19 @@ MyBooks.propTypes = {
   dispatch: PropTypes.func,
   isAuthenticated: PropTypes.bool,
   apiBook: PropTypes.object,
-  userID: PropTypes.string,
+  user: PropTypes.object,
   books: PropTypes.array
 }
 
 const mapStateToProps = (state) => {
-  const { isAuthenticated, userID } = state.userReducer
+  const { isAuthenticated, user } = state.userReducer
   const { apiBook } = state.apiBookReducer
   const { books } = state.bookReducer
-  const myBooks = books.filter( book => book.ownerID._id == userID)
+  const myBooks = books.filter( book => book.owner._id === user._id)
 
   return {
     isAuthenticated,
-    userID,
+    user,
     apiBook,
     books: myBooks
   }

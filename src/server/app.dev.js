@@ -12,6 +12,7 @@ import user from './routes/user'
 import api from './routes/api'
 import book from './routes/book'
 
+
 let app = express()
 
 const compiler = webpack(webpackConfig)
@@ -30,6 +31,7 @@ app.use(bodyParser.json())
 app.use('/', user)
 app.use('/api', api)
 app.use('/books', book)
+
 
 app.get('*', (req,res) => {
   res.sendFile(path.join(__dirname, '../client/index.html'))

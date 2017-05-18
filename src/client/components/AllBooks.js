@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { connect } from 'react-redux'
-import { updateBook, deleteBook, getBooks } from '../actions/bookActions'
+import { deleteBook, getBooks } from '../actions/bookActions'
 
 import Navbar from './Navbar'
 
@@ -25,7 +25,7 @@ class AllBooks extends Component {
   handleTradeRequestModal (event) {
     event.preventDefault()
     let book = this.props.books.filter(book => book._id === event.target.value)
-    let myBooks = this.props.books.filter(book => book.ownerID.email == this.props.user)
+    let myBooks = this.props.books.filter(book => book.owner.email == this.props.user)
     this.setState({
       tradeRequestModal: this.state.tradeRequestModal ? false : true,
       requestedBook: book[0],
@@ -47,23 +47,7 @@ class AllBooks extends Component {
   }
   handleSubmitTrade (event) {
     event.preventDefault()
-    if (this.state.bookToTradeID) {
-      updateBook({requestedBookID: this.state.requestedBook._id, userID: this.props.userID, userBookForTradeID: this.state.bookToTradeID})
-      .then(
-        () => {
-          this.props.dispatch(getBooks())
-          this.setState({
-            tradeRequestModal: false,
-            requestedBook: null,
-            myBooks: null,
-            bookToTradeID: null
-          })
-        })
-      .catch(
-        error => {
-          console.log(error)
-        })
-    }
+    console.log(event.target)
   }
   handleSelectBookToTrade (event) {
     event.preventDefault()
@@ -87,10 +71,10 @@ class AllBooks extends Component {
                   <div key={book._id} className='col-sm-2'>
                     <div className='col-sm-12 book'>
                       <h4 className='title'>{book.title}</h4>
-                      <h6 className='owner'>Owner: {book.ownerID.email}</h6>
+                      <h6 className='owner'>Owner: {book.owner.email}</h6>
                       <img src={book.cover} />
-                      {book.ownerID.email !== user && <button value={book._id} onClick={this.handleTradeRequestModal} className='btn btn-primary'>Request Trade</button>}
-                      {book.ownerID.email === user && <button value={book._id} onClick={this.handleRemoveBook} className='btn btn-danger'>Remove Book</button>}
+                      {book.owner.email !== user && <button value={book._id} onClick={this.handleTradeRequestModal} className='btn btn-primary'>Request Trade</button>}
+                      {book.owner.email === user && <button value={book._id} onClick={this.handleRemoveBook} className='btn btn-danger'>Remove Book</button>}
                     </div>
                   </div>
                 )
@@ -100,7 +84,7 @@ class AllBooks extends Component {
                                               <div className='trade-request'>
                                                 <h1>Create Trade Request</h1>
                                                 <h3>{this.state.requestedBook.title}</h3>
-                                                <h4>Owner: {this.state.requestedBook.ownerID.email}</h4>
+                                                <h4>Owner: {this.state.requestedBook.owner.email}</h4>
                                                 <img src={this.state.requestedBook.cover} />
                                                 <div className='form-group my-books'>
                                                   <h2>Select a book to trade:</h2>
@@ -132,18 +116,16 @@ AllBooks.propTypes = {
   isAuthenticated: PropTypes.bool,
   books: PropTypes.array,
   user: PropTypes.string,
-  dispatch: PropTypes.func,
-  userID: PropTypes.string
+  dispatch: PropTypes.func
 }
 
 const mapStateToProps = (state) => {
-  const { isAuthenticated, user, userID } = state.userReducer
+  const { isAuthenticated, user } = state.userReducer
   const { books } = state.bookReducer
   return {
     isAuthenticated,
     books,
-    user,
-    userID
+    user: user.email
   }
 }
 
