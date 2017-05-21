@@ -16,10 +16,10 @@ export function setApiBookErrors(apiBookErrors) {
   return {type: SET_API_BOOK_ERRORS, apiBookErrors: apiBookErrors}
 }
 
-export const requestApiBook = (searchTerm) => {
+export const requestApiBook = (userData) => {
   return function (dispatch) {
     dispatch(setApiBookSearch())
-    return axios.post('/api', searchTerm)
+    return axios.post('/api', userData)
     .then(
       response => {
         dispatch(setApiBook(response.data.apiBook))

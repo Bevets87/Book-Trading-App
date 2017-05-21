@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { connect } from 'react-redux'
-import { deleteBook, getBooks } from '../actions/bookActions'
+import { deleteBook, getBooks, setBooksErrors } from '../actions/bookActions'
+import { createTradeRequest, getTradeRequests, setTradeRequestsErrors } from '../actions/tradeRequestActions'
 
 import Navbar from './Navbar'
 
@@ -15,21 +16,25 @@ class AllBooks extends Component {
       tradeRequestModal: false,
       requestedBook: null,
       myBooks: null,
-      bookToTradeID: null
+      bookToTrade: null
     }
     this.handleTradeRequestModal = this.handleTradeRequestModal.bind(this)
     this.handleRemoveBook = this.handleRemoveBook.bind(this)
-    this.handleSubmitTrade = this.handleSubmitTrade.bind(this)
+    this.handleRequestTrade = this.handleRequestTrade.bind(this)
     this.handleSelectBookToTrade = this.handleSelectBookToTrade.bind(this)
+  }
+  componentDidMount () {
+    let myBooks = this.props.books.filter(book => book.owner.email == this.props.user.email)
+    this.setState({
+      myBooks: myBooks
+    })
   }
   handleTradeRequestModal (event) {
     event.preventDefault()
-    let book = this.props.books.filter(book => book._id === event.target.value)
-    let myBooks = this.props.books.filter(book => book.owner.email == this.props.user)
+    let requestedBook = this.props.books.filter(book => book._id == event.target.value)
     this.setState({
       tradeRequestModal: this.state.tradeRequestModal ? false : true,
-      requestedBook: book[0],
-      myBooks: myBooks
+      requestedBook: requestedBook[0]
     })
   }
   handleRemoveBook (event) {
@@ -42,18 +47,32 @@ class AllBooks extends Component {
       })
     .catch(
       error => {
-        console.log(error.response.data.errors)
+        this.props.dispatch(setBooksErrors(error.response.data.errors))
       })
   }
-  handleSubmitTrade (event) {
+  handleRequestTrade (event) {
     event.preventDefault()
-    console.log(event.target)
+    let token = localStorage.getItem('token')
+    const { requestedBook, bookToTrade } = this.state
+    createTradeRequest({token: token, to: requestedBook.owner._id, from: bookToTrade.owner._id, getBookID: requestedBook._id, giveBookID: bookToTrade._id})
+    .then(
+      () => {
+        this.props.dispatch(getTradeRequests())
+        this.setState({
+          tradeRequestModal: this.state.tradeRequestModal ? false : true
+        })
+      })
+    .catch(
+      error => {
+        this.props.dispatch(setTradeRequestsErrors(error.response.data.errors))
+      }
+    )
   }
   handleSelectBookToTrade (event) {
     event.preventDefault()
-    console.log(event.target.value)
+    let bookToTrade = this.props.books.filter(book => book._id == event.target.value)
     this.setState({
-      bookToTradeID: event.target.value
+      bookToTrade: bookToTrade[0]
     })
   }
   render () {
@@ -66,15 +85,15 @@ class AllBooks extends Component {
           <div className='container-fluid all-books-container'>
             <h1><span className='glyphicon glyphicon-book'></span>AllBooks</h1>
             <div className='row all-books'>
-              {books.map(book => {
+              {books.filter(book => book.owner.email !== user.email ).map(book => {
                 return (
                   <div key={book._id} className='col-sm-2'>
                     <div className='col-sm-12 book'>
                       <h4 className='title'>{book.title}</h4>
                       <h6 className='owner'>Owner: {book.owner.email}</h6>
                       <img src={book.cover} />
-                      {book.owner.email !== user && <button value={book._id} onClick={this.handleTradeRequestModal} className='btn btn-primary'>Request Trade</button>}
-                      {book.owner.email === user && <button value={book._id} onClick={this.handleRemoveBook} className='btn btn-danger'>Remove Book</button>}
+                      {book.owner.email !== user.email && <button value={book._id} onClick={this.handleTradeRequestModal} className='btn btn-primary'>Request Trade</button>}
+                      {book.owner.email === user.email && <button value={book._id} onClick={this.handleRemoveBook} className='btn btn-danger'>Remove Book</button>}
                     </div>
                   </div>
                 )
@@ -93,7 +112,7 @@ class AllBooks extends Component {
                                                   </select>
                                                 </div>
                                                 <div className='button-container'>
-                                                  <button onClick={this.handleSubmitTrade} className='btn btn-primary'>Submit Trade</button>
+                                                  <button onClick={this.handleRequestTrade} className='btn btn-primary'>Submit Trade</button>
                                                   <button onClick={this.handleTradeRequestModal} className='btn btn-danger'>Decline Trade</button>
                                                 </div>
                                               </div>
@@ -115,7 +134,7 @@ class AllBooks extends Component {
 AllBooks.propTypes = {
   isAuthenticated: PropTypes.bool,
   books: PropTypes.array,
-  user: PropTypes.string,
+  user: PropTypes.object,
   dispatch: PropTypes.func
 }
 
@@ -125,7 +144,7 @@ const mapStateToProps = (state) => {
   return {
     isAuthenticated,
     books,
-    user: user.email
+    user
   }
 }
 

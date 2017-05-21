@@ -11,7 +11,7 @@ import webpackConfig from '../../webpack.config.dev'
 import user from './routes/user'
 import api from './routes/api'
 import book from './routes/book'
-
+import request from './routes/request'
 
 let app = express()
 
@@ -31,6 +31,8 @@ app.use(bodyParser.json())
 app.use('/', user)
 app.use('/api', api)
 app.use('/books', book)
+app.use('/trades', request)
+
 
 
 app.get('*', (req,res) => {

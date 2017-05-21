@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { connect } from 'react-redux'
-import { userRegistrationRequest, setUser, setErrors } from '../actions/userActions'
+import { userRegistrationRequest, setUser, setUserErrors } from '../actions/userActions'
 
 import validateRegistrationInput from '../../server/shared/validations/register'
 
@@ -109,14 +109,13 @@ class Register extends Component {
         })
       .catch(
         error => {
-          this.props.dispatch(setErrors(error.response.data.errors))
+          this.props.dispatch(setUserErrors(error.response.data.errors))
         })
     }
   }
   render () {
     const { clientErrors } = this.state
     const { serverErrors } = this.props
-    console.log(serverErrors)
     return (
       <div>
         <Navbar />
@@ -151,7 +150,9 @@ class Register extends Component {
             </div>
           </form>
           </div>
+          {serverErrors.registrationForm && <div className='register-server-error-container'><h2>{serverErrors.registrationForm}</h2></div>}
         </div>
+  
       </div>
     )
   }

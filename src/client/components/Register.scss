@@ -2,7 +2,7 @@ $main-font-color: rgb(67,147,185);
 $main-background-color: rgba(50,200,255, 0.1);
 
 .main-container {
-  height: calc(100vh - 50px);
+  height: auto;
   background: $main-background-color;
   .mobile-register-container {
 
@@ -53,4 +53,11 @@ $main-background-color: rgba(50,200,255, 0.1);
       }
     }
   }
+}
+
+.register-server-error-container {
+  margin-top: 100px;
+  text-align: right;
+  color: red;
+  font-weight: bold;
 }

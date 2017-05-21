@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import { requestApiBook, setApiBook } from '../actions/apiBookActions'
-import { createBook, deleteBook, getBooks } from '../actions/bookActions'
+import { createBook, deleteBook, getBooks, setBooksErrors } from '../actions/bookActions'
 
 import Navbar from './Navbar'
 
@@ -30,13 +30,15 @@ class MyBooks extends Component {
   }
   handleSubmitSearch (event) {
     event.preventDefault()
-    this.props.dispatch(requestApiBook({searchTerm: this.state.searchTerm}))
+    let token = localStorage.getItem('token')
+    this.props.dispatch(requestApiBook({token: token, searchTerm: this.state.searchTerm}))
   }
   handleAddBook (event) {
     event.preventDefault()
+    let token = localStorage.getItem('token')
     let book = this.props.apiBook
     book.owner = this.props.user._id
-    createBook(book)
+    createBook({title: book.title, author: book.author, cover: book.cover, owner: book.owner, token: token})
     .then(
       () => {
         this.props.dispatch(getBooks())
@@ -47,20 +49,21 @@ class MyBooks extends Component {
       })
     .catch(
       error => {
-        console.log(error.response.data.errors)
+        this.props.dispatch(setBooksErrors(error.response.data.errors))
       })
   }
   handleRemoveBook (event) {
     event.preventDefault()
+    let token = localStorage.getItem('token')
     let bookID = event.target.value
-    deleteBook({bookID: bookID})
+    deleteBook({bookID: bookID, token: token})
     .then(
       () => {
         this.props.dispatch(getBooks())
       })
     .catch(
       error => {
-        console.log(error.response.data.errors)
+        this.props.dispatch(setBooksErrors(error.response.data.errors))
       })
   }
   handleRemoveApiBook (event) {
@@ -82,7 +85,7 @@ class MyBooks extends Component {
             <div className='row my-books'>
               {books.map(book => {
                 return (
-                  <div className='col-sm-2'>
+                  <div  key={book._id} className='col-sm-2'>
                     <div className='col-sm-12 my-book'>
                       <h4 className='title'>{book.title}</h4>
                       <img src={book.cover} />

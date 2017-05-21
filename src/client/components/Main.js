@@ -130,11 +130,9 @@ class Main extends Component {
   render () {
     const { clientErrors } = this.state
     const { serverErrors } = this.props
-    console.log(serverErrors)
-
     return (
       <div>
-        <Navbar userLoginRequest={this.handleUserLoginRequest} />
+        <Navbar serverErrors={this.props.serverErrors} userLoginRequest={this.handleUserLoginRequest} />
         <div className='container-fluid main-container'>
             <div className='row'>
               <div className='col-sm-6'>
@@ -176,6 +174,7 @@ class Main extends Component {
                     </div>
                   </form>
                 </div>
+                  {serverErrors.registrationForm && <div className='main-server-error-container'><h2>{serverErrors.registrationForm}</h2></div>}
               </div>
             </div>
           </div>
@@ -191,7 +190,7 @@ Main.propTypes = {
 }
 
 const mapStateToProps = (state) => {
-  const { serverErrors,  } = state.userReducer
+  const { serverErrors } = state.userReducer
 
   return {
     serverErrors

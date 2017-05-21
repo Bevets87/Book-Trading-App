@@ -92,7 +92,6 @@ class Login extends Component {
   render () {
     const { clientErrors } = this.state
     const { serverErrors } = this.props
-    console.log(serverErrors)
     return (
       <div>
         <Navbar />
@@ -111,8 +110,8 @@ class Login extends Component {
               <input placeholder='Password' type='password' className='form-control' id='pwd' onChange={this.handleInput} />
               {clientErrors.password && <span className='error'>{clientErrors.password}</span>}
             </div>
-
           </form>
+          {serverErrors.loginForm && <div className='login-server-error-container'><h2>{serverErrors.loginForm}</h2></div>}
           </div>
         </div>
       </div>

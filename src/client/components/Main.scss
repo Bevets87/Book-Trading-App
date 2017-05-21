@@ -2,11 +2,8 @@ $main-background-color: rgba(50,200,255, 0.1);
 $main-font-color: rgb(67,147,185);
 
 .main-container {
-  height: calc(100vh - 80px);
+  height: auto;
   background: $main-background-color;
-  @media (max-width: 767.99px) {
-    height: calc(100vh - 50px);
-  }
   .about-container {
 
     h2 {
@@ -75,5 +72,14 @@ $main-font-color: rgb(67,147,185);
         width: 30%;
       }
     }
+  }
+}
+
+.main-server-error-container {
+  text-align: right;
+  color: red;
+  font-weight: bold;
+  @media (max-width: 767.99px) {
+    display: none;
   }
 }

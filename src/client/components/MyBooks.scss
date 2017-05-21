@@ -5,10 +5,9 @@ $main-font-color: rgb(67,147,185);
   text-align: center;
   color: $main-font-color;
   background: $main-background-color;
-  height: calc(100vh - 80px);
-
+  min-height: calc(100vh - 80px);
+  max-height: auto;
   h1 {
-
     text-align: left;
     display: block;
     margin-top: 50px;

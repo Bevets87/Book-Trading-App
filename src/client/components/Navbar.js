@@ -83,7 +83,7 @@ class Navbar extends Component {
   }
   render () {
     const { clientErrors } = this.state
-    const { isAuthenticated } = this.props
+    const { isAuthenticated, serverErrors } = this.props
     if (isAuthenticated) {
       return (
         <nav>
@@ -126,6 +126,7 @@ class Navbar extends Component {
             </div>
             <button type='submit' className='btn' onClick={this.handleNavLogin}>Login</button>
           </form>
+          {serverErrors.loginForm && <div className='nav-server-error-container'><h2>{serverErrors.loginForm}</h2></div>}
           <div className='hamburger-container' onClick={this.handleDropDownMenu}>
             <span className='glyphicon glyphicon-menu-hamburger'></span>
           </div>

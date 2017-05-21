@@ -58,7 +58,6 @@ export const handle_user_login = function (req, res) {
   if(isValid){
     User.findOne({email: email}, (err, user) => {
       if(user && bcrypt.compareSync(password, user.password)) {
-
         res.status(200).json({
           email: user.email,
           _id: user._id,
@@ -67,7 +66,7 @@ export const handle_user_login = function (req, res) {
           fullName: user.fullName,
           token: createToken(user.email)
         })
-      } else if (!user) {
+      } else {
         res.status(401).json({
           errors: {loginForm: 'Invalid Credentials!'}
         })

@@ -18,11 +18,3 @@ export function userRegistrationRequest(userData) {
 export function userLoginRequest(userData) {
   return axios.post('/login', userData)
 }
-
-export function userTradeRequest(userData) {
-  return axios.post('/trade-request', userData)
-}
-
-export function userTradeResponse(userData) {
-  return axios.post('/trade-response', userData)
-}
