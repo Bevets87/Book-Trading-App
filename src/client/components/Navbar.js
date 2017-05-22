@@ -97,7 +97,7 @@ class Navbar extends Component {
             <Link to='/all-books'><li>All Books</li></Link>
             <Link to='/my-books'><li>My Books</li></Link>
             <Link to='/my-trades'><li>My Trades</li></Link>
-            <li>Account</li>
+            <Link to='/account'><li>Account</li></Link>
             <li onClick={this.handleLogout}>Logout</li>
           </ul>
           <div className='hamburger-container' onClick={this.handleDropDownMenu}>

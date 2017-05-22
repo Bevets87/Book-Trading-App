@@ -36,23 +36,13 @@ class MyTrades extends Component {
     updateBook({token: token, tradeID: tradeID})
     .then(
       () => {
-        deleteTradeRequest({tradeID: tradeID, token: token})
-        .then(
-          () => {
-            this.props.dispatch(getTradeRequests())
-            this.props.dispatch(getBooks())
-          })
-        .catch(
-          error => {
-            this.props.dispatch(setTradeRequestsErrors(error.response.data.errors))
-          })
-      }
-    )
+        this.props.dispatch(getTradeRequests())
+        this.props.dispatch(getBooks())
+      })
     .catch(
       error => {
         this.props.dispatch(setBooksErrors(error.response.data.errors))
-      }
-    )
+      })
   }
   render () {
     const { isAuthenticated, myTradeRequests, friendsTradeRequests } = this.props
@@ -69,15 +59,26 @@ class MyTrades extends Component {
                   <div className='row'>
                     <div className='col-xs-12'>
                     {myTradeRequests && myTradeRequests.map(myTradeRequest => {
-                      const { getBook, giveBook, to } = myTradeRequest
-                      return (
-                        <div key={myTradeRequest._id} className='col-xs-12 trade-container'>
-                          <p>You have sent a request to <b>{to.email}</b> for <i>{getBook.title}</i> in exchange for <i>{giveBook.title}</i>.</p>
-                          <div className='buttons-container'>
-                            <button id={myTradeRequest._id} onClick={this.handleDeleteRequest} className='btn btn-danger'>Remove Request</button>
+                      const { getBook, giveBook, to, tradeResponse } = myTradeRequest
+                      if (!tradeResponse) {
+                        return (
+                          <div key={myTradeRequest._id} className='col-xs-12 trade-container'>
+                            <p>You have sent a request to <b>{to.email}</b> for <i>{getBook.title}</i> in exchange for <i>{giveBook.title}</i>.</p>
+                            <div className='buttons-container'>
+                              <button id={myTradeRequest._id} onClick={this.handleDeleteRequest} className='btn btn-danger'>Remove Request</button>
+                            </div>
                           </div>
-                        </div>
-                      )
+                        )
+                      } else if (tradeResponse) {
+                        return (
+                          <div key={myTradeRequest._id} className='col-xs-12 trade-container'>
+                            <p>Your request to <b>{to.email}</b> for <i>{getBook.title}</i> in exchange for <i>{giveBook.title}</i> has been accepted.</p>
+                            <div className='buttons-container'>
+                              <button id={myTradeRequest._id} onClick={this.handleDeleteRequest} className='btn btn-primary'>OK</button>
+                            </div>
+                          </div>
+                        )
+                      }
                     })}
                     </div>
                   </div>
@@ -86,7 +87,7 @@ class MyTrades extends Component {
               <div className='col-sm-6'>
                 <h2>Friends Requests</h2>
                 <div className='col-sm-12 friends-trade-request-container '>
-                {friendsTradeRequests && friendsTradeRequests.map(friendsTradeRequest => {
+                {friendsTradeRequests && friendsTradeRequests.filter(friendsTradeRequest => friendsTradeRequest.tradeResponse !== true).map(friendsTradeRequest => {
                   const { getBook, giveBook, from } = friendsTradeRequest
                   return (
                     <div key={friendsTradeRequest._id} className='col-xs-12 trade-container'>

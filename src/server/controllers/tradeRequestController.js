@@ -26,7 +26,8 @@ export const handle_create_request = (req, res) => {
         to: to,
         from: from,
         getBook: getBookID,
-        giveBook: giveBookID
+        giveBook: giveBookID,
+        tradeResponse: false
       })
     tradeRequest.save((err, tradeRequest) => {
       if (err) return console.error(err)

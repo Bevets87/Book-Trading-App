@@ -85,8 +85,8 @@ class MyBooks extends Component {
             <div className='row my-books'>
               {books.map(book => {
                 return (
-                  <div  key={book._id} className='col-sm-2'>
-                    <div className='col-sm-12 my-book'>
+                  <div  key={book._id} className='col-md-3 col-sm-4'>
+                    <div className='col-md-12 col-sm-12 my-book'>
                       <h4 className='title'>{book.title}</h4>
                       <img src={book.cover} />
                       <button value={book._id} onClick={this.handleRemoveBook} className='btn btn-danger'>Remove Book</button>

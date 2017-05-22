@@ -77,3 +77,29 @@ export const handle_user_login = function (req, res) {
     res.status(400).json({errors})
   }
 }
+
+export const handle_user_update = function (req, res) {
+  const { userData } = req.body
+  jwt.verify(userData.token, JWT_SECRET, (err, decoded) => {
+    if (!err) {
+      User.findOne({_id: userData.userID}, (err, user) => {
+        if (err) return console.error(err)
+        user.city = userData.userCity
+        user.state = userData.userState
+        user.fullName = userData.userFullName
+        user.save((err, user) => {
+          if (err) return console.error(err)
+          res.json({
+            email: user.email,
+            _id: user._id,
+            city: user.city,
+            state: user.state,
+            fullName: user.fullName
+          })
+        })
+      })
+    } else {
+      res.json({errors: 'Invalid User'})
+    }
+  })
+}

@@ -1,5 +1,5 @@
 $nav-background-color: rgb(67,147,185);
-
+$main-hover-color: rgba(50,200,255, 0.9);
 nav {
   margin: 0;
   padding: 0;
@@ -102,10 +102,12 @@ nav {
       font-size: 20px;
       margin-top: 30px;
       color: white;
-      margin-right: 30px;
+      margin-right: 25px;
       font-weight: bold;
       cursor: pointer;
-
+      &:hover {
+        color: $main-hover-color;
+      }
     }
   }
 }
@@ -127,6 +129,9 @@ nav {
   h2 {
     cursor: pointer;
     border-bottom: 1px solid white;
+    &:hover {
+      color: $main-hover-color;
+    }
   }
 }
 

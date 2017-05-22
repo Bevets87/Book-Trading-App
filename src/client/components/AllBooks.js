@@ -87,8 +87,8 @@ class AllBooks extends Component {
             <div className='row all-books'>
               {books.filter(book => book.owner.email !== user.email ).map(book => {
                 return (
-                  <div key={book._id} className='col-sm-2'>
-                    <div className='col-sm-12 book'>
+                  <div key={book._id} className='col-md-3 col-sm-4'>
+                    <div className='col-md-12 col-sm-12 book'>
                       <h4 className='title'>{book.title}</h4>
                       <h6 className='owner'>Owner: {book.owner.email}</h6>
                       <img src={book.cover} />

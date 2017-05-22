@@ -1,0 +1,71 @@
+$main-background-color: rgba(50,200,255, 0.1);
+$main-font-color: rgb(67,147,185);
+
+.account-container {
+  min-height: calc(100vh - 80px);
+  max-height: auto;
+  background: $main-background-color;
+  color: $main-font-color;
+  @media (max-width: 767.99px) {
+    min-height: calc(100vh - 50px);
+    max-height: auto;
+  }
+  h1 {
+    text-align: left;
+    display: block;
+    margin-top: 50px;
+    font-size: 60px;
+    @media (max-width: 767.99px) {
+      font-size: 45px;
+    }
+  }
+  .account-info {
+    background: white;
+    border: 2px solid $main-font-color;
+    border-radius: 10px;
+    width: 600px;
+    margin: 20px auto;
+    height: auto;
+    text-align: center;
+    @media (max-width: 767.99px) {
+      width: 99%;
+    }
+    h1 {
+      text-align: center;
+      font-weight: bold;
+      margin-top: 0;
+    }
+    label {
+      display: block;
+      text-align: center;
+      font-size: 25px;
+    }
+    input {
+      display: inline-block;
+      width: 70%;
+      height: 50px;
+      margin: 0 auto;
+      font-size: 20px;
+      border: 2px solid $main-font-color;
+      @media (max-width: 767.99px) {
+        width: 50%;
+      }
+      &::placeholder {
+        color: $main-font-color;
+        text-align: left;
+        font-weight: bold;
+        font-size: 25px;
+      }
+    }
+    .button-container {
+      display: inline-block;
+      height: 50px;
+      button {
+        font-size: 20px;
+        height: 50px;
+        margin-top: -5px;
+      }
+    }
+
+  }
+}

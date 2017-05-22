@@ -18,3 +18,7 @@ export function userRegistrationRequest(userData) {
 export function userLoginRequest(userData) {
   return axios.post('/login', userData)
 }
+
+export function updateUser(userData) {
+  return axios.post('/user/update', userData)
+}

@@ -2,7 +2,8 @@ $main-font-color: rgb(67,147,185);
 $main-background-color: rgba(50,200,255, 0.1);
 
 .main-container {
-  height: auto;
+  min-height: calc(100vh - 50px);
+  max-height: auto;
   background: $main-background-color;
   .mobile-login-container {
 

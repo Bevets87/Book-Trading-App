@@ -76,8 +76,13 @@ export const handle_update_book = (req, res) => {
           giveBook.owner = tradeRequest.to._id
           giveBook.save((err, giveBook) => {
             if (err) return console.error(err)
-            res.json({book: giveBook})
+            console.log(giveBook)
           })
+        })
+        tradeRequest.tradeResponse = true
+        tradeRequest.save((err, tradeRequest) => {
+          if (err) return console.error(err)
+          res.json({tradeRequest: tradeRequest})
         })
       })
     } else {
