@@ -1,4 +1,4 @@
 export default {
-  JWT_SECRET: 'super secret secret of secrets',
-  API_KEY: 'pkXxiLL2NSejHsz051oEg'
+  JWT_SECRET: process.env.JWT_SECRET,
+  API_KEY: process.env.API_KEY
 }
