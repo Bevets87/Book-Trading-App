@@ -99,7 +99,6 @@ class Login extends Component {
           <div className='mobile-login-container'>
           <form>
             <div className='login-title'>
-              <h1>Login:</h1>
               <button type='submit' className='btn btn-primary' onClick={this.handleLogin}>Login</button>
             </div>
             <div className='form-group'>

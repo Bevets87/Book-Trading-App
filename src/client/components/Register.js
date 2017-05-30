@@ -123,7 +123,6 @@ class Register extends Component {
           <div className='mobile-register-container'>
           <form>
             <div className='register-title'>
-              <h1>Register:</h1>
               <button type='submit' className='btn btn-primary' onClick={this.handleRegister}>Register</button>
             </div>
             <div className='form-group'>
@@ -152,7 +151,7 @@ class Register extends Component {
           </div>
           {serverErrors.registrationForm && <div className='register-server-error-container'><h2>{serverErrors.registrationForm}</h2></div>}
         </div>
-  
+
       </div>
     )
   }

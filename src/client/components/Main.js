@@ -147,7 +147,6 @@ class Main extends Component {
                 <div className='col-sm-12 register-container'>
                   <form>
                     <div className='register-title'>
-                      <h1>Register:</h1>
                       <button type='submit' className='btn btn-primary' onClick={this.handleRegister}>Register</button>
                     </div>
                     <div className='form-group'>

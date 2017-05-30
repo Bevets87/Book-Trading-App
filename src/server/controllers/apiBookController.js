@@ -2,8 +2,8 @@ import mongoose from 'mongoose'
 import _ from 'lodash'
 import axios from 'axios'
 import jwt from 'jsonwebtoken'
-import config from '../config'
 import XMLConverter from 'xmljson'
+import config from '../../../config'
 const { API_KEY, JWT_SECRET } = config
 
 export const handle_get_api_book = (req, res) => {
