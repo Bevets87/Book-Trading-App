@@ -11,7 +11,7 @@ import validateRegistrationInput from '../shared/validations/register'
 import validateLoginInput from '../shared/validations/login'
 
 const createToken = function(username) {
-  return jwt.sign({user: username}, JWT_SECRET , {expiresIn: 60 * 60})
+  return jwt.sign({user: username}, process.env.JWT_SECRET || JWT_SECRET, {expiresIn: 60 * 60})
 }
 
 export const handle_user_registration = function (req, res) {
@@ -80,7 +80,7 @@ export const handle_user_login = function (req, res) {
 
 export const handle_user_update = function (req, res) {
   const { userData } = req.body
-  jwt.verify(userData.token, JWT_SECRET, (err, decoded) => {
+  jwt.verify(userData.token, process.env.JWT_SECRET || JWT_SECRET, (err, decoded) => {
     if (!err) {
       User.findOne({_id: userData.userID}, (err, user) => {
         if (err) return console.error(err)

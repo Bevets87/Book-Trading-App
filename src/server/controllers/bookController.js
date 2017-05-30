@@ -18,7 +18,7 @@ export const handle_get_books = (req, res) => {
 
 export const handle_create_book = (req, res) => {
   const { title, author, cover, owner, token } = req.body
-  jwt.verify(token, JWT_SECRET, (err, decoded) => {
+  jwt.verify(token, process.env.JWT_SECRET || JWT_SECRET, (err, decoded) => {
     if (!err) {
       let book = new Book({
         title: title,
@@ -39,7 +39,7 @@ export const handle_create_book = (req, res) => {
 
 export const handle_delete_book = (req, res) => {
   const { bookID, token } = req.body
-  jwt.verify(token, JWT_SECRET, (err, decoded) => {
+  jwt.verify(token, process.env.JWT_SECRET || JWT_SECRET, (err, decoded) => {
     if (!err) {
       Book.findOneAndRemove({_id: bookID}, (err, book) => {
         if (err) return console.error(err)
@@ -54,7 +54,7 @@ export const handle_delete_book = (req, res) => {
 
 export const handle_update_book = (req, res) => {
   const { tradeID, token } = req.body
-  jwt.verify(token, JWT_SECRET, (err, decoded) => {
+  jwt.verify(token, process.env.JWT_SECRET || JWT_SECRET, (err, decoded) => {
     if (!err) {
       TradeRequest.findOne({_id: tradeID})
       .populate('getBook')

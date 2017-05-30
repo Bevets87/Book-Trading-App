@@ -8,9 +8,9 @@ const { API_KEY, JWT_SECRET } = config
 
 export const handle_get_api_book = (req, res) => {
   const { searchTerm, token} = req.body
-  jwt.verify(token, JWT_SECRET, (err, decoded) => {
+  jwt.verify(token, process.env.JWT_SECRET || JWT_SECRET, (err, decoded) => {
     if (!err) {
-      axios.get(`https://www.goodreads.com/search.xml?key=${API_KEY}&q=${searchTerm}`)
+      axios.get(`https://www.goodreads.com/search.xml?key=${process.env.API_KEY || API_KEY}&q=${searchTerm}`)
       .then(
         response => {
           var xml = response.data

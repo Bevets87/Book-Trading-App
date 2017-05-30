@@ -20,7 +20,7 @@ export const handle_get_requests = (req, res) => {
 
 export const handle_create_request = (req, res) => {
   const {to, from, getBookID, giveBookID, token } = req.body
-  jwt.verify(token, JWT_SECRET, (err, decoded) => {
+  jwt.verify(token, process.env.JWT_SECRET || JWT_SECRET, (err, decoded) => {
     if (!err) {
       let tradeRequest = new TradeRequest({
         to: to,
@@ -42,7 +42,7 @@ export const handle_create_request = (req, res) => {
 
 export const handle_delete_request = (req, res) => {
   const { tradeID, token } = req.body
-  jwt.verify(token, JWT_SECRET, (err, decoded) => {
+  jwt.verify(token, process.env.JWT_SECRET || JWT_SECRET, (err, decoded) => {
     if (!err) {
       TradeRequest.findOneAndRemove({_id: tradeID}, (err, tradeRequest) => {
         if (err) return console.error(err)
