@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 import _ from 'lodash'
-import  config from '../../../config'
+import  config from '../config'
 const { JWT_SECRET } = config
 import TradeRequest from '../models/TradeRequest'
 
