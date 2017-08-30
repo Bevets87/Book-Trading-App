@@ -2,11 +2,7 @@ import mongoose from 'mongoose'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 import _ from 'lodash'
-import  config from '../config'
-const { JWT_SECRET } = config
-
 import User from '../models/User'
-
 import validateRegistrationInput from '../shared/validations/register'
 import validateLoginInput from '../shared/validations/login'
 
@@ -46,7 +42,7 @@ export const handle_user_registration = function (req, res) {
         res.status(401).json({errors: {registrationForm: 'The email supplied is already registered!'}})
       }
     })
-  }else {
+  } else {
     res.status(400).json({errors})
   }
 }

@@ -4,8 +4,8 @@
   "description": "an application that allows users to login and trade books",
   "main": "./src/server/app.prod.js",
   "scripts": {
+    "prebuild": "node_modules/.bin/rimraf ./dist",
     "build": "webpack --config ./webpack.config.prod.js -p --progress --colors",
-    "remove-build": "node_modules/.bin/rimraf ./dist",
     "dev": "nodemon --watch src/server --exec babel-node -- ./src/server/app.dev.js",
     "prod": "babel-node ./src/server/app.prod.js",
     "start": "babel-node ./src/server/app.prod.js"

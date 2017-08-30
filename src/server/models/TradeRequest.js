@@ -18,7 +18,7 @@ const tradeRequestSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'book'
   },
-  tradeResponse: Boolean
+  tradeResponse: Boolean 
 })
 
 const TradeRequest = mongoose.model('trade_request', tradeRequestSchema)
