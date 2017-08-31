@@ -3,7 +3,6 @@ import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 import _ from 'lodash'
 import TradeRequest from '../models/TradeRequest'
-import { JWT_SECRET, API_KEY } from '../config'
 
 export const handle_get_requests = (req, res) => {
   TradeRequest.find()

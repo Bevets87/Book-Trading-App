@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt'
 import _ from 'lodash'
 import Book from '../models/Book'
 import TradeRequest from '../models/TradeRequest'
-import { JWT_SECRET, API_KEY } from '../config'
+
 
 export const handle_get_books = (req, res) => {
   Book.find()

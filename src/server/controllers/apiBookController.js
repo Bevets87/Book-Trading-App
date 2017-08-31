@@ -3,8 +3,6 @@ import _ from 'lodash'
 import axios from 'axios'
 import jwt from 'jsonwebtoken'
 import XMLConverter from 'xmljson'
-import { JWT_SECRET, API_KEY } from '../config'
-
 
 export const handle_get_api_book = (req, res) => {
   const { searchTerm, token} = req.body
