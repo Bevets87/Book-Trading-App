@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 
 import { requestApiBook, setApiBook } from '../actions/apiBookActions'
 import { createBook, deleteBook, getBooks, setBooksErrors } from '../actions/bookActions'
+import { getTradeRequests } from '../actions/tradeRequestActions'
 
 import Navbar from './Navbar'
 
@@ -59,6 +60,7 @@ class MyBooks extends Component {
     deleteBook({bookID: bookID, token: token})
     .then(
       () => {
+        this.props.dispatch(getTradeRequests())
         this.props.dispatch(getBooks())
       })
     .catch(

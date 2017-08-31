@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { Redirect } from 'react-router-dom'
 
 import { connect } from 'react-redux'
 import { userRegistrationRequest, userLoginRequest, setUser, setUserErrors } from '../actions/userActions'
@@ -129,8 +130,9 @@ class Main extends Component {
   }
   render () {
     const { clientErrors } = this.state
-    const { serverErrors } = this.props
-    return (
+    const { serverErrors, isAuthenticated } = this.props
+    if (!isAuthenticated) {
+      return (
       <div>
         <Navbar serverErrors={this.props.serverErrors} userLoginRequest={this.handleUserLoginRequest} />
         <div className='container-fluid main-container'>
@@ -178,21 +180,28 @@ class Main extends Component {
             </div>
           </div>
       </div>
-    )
+      )
+    } else {
+      return (
+      <Redirect to='/all-books'/>
+      )
+    }
   }
 }
 
 Main.propTypes = {
   history: PropTypes.object,
   dispatch: PropTypes.func,
-  serverErrors: PropTypes.object
+  serverErrors: PropTypes.object,
+  isAuthenticated: PropTypes.bool
 }
 
 const mapStateToProps = (state) => {
-  const { serverErrors } = state.userReducer
+  const { serverErrors, isAuthenticated } = state.userReducer
 
   return {
-    serverErrors
+    serverErrors,
+    isAuthenticated
   }
 }
 export default connect(mapStateToProps)(Main)

@@ -6,6 +6,7 @@ import User from '../models/User'
 import validateRegistrationInput from '../shared/validations/register'
 import validateLoginInput from '../shared/validations/login'
 
+
 const createToken = function(username) {
   return jwt.sign({user: username}, process.env.JWT_SECRET || JWT_SECRET, {expiresIn: 60 * 60})
 }

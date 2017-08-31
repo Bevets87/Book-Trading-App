@@ -23,6 +23,7 @@ class MyTrades extends Component {
     .then(
       () => {
         this.props.dispatch(getTradeRequests())
+        this.props.dispatch(getBooks())
       })
     .catch(
       error => {
@@ -58,7 +59,7 @@ class MyTrades extends Component {
                 <div className='col-sm-12 my-trade-requests-container'>
                   <div className='row'>
                     <div className='col-xs-12'>
-                    {myTradeRequests && myTradeRequests.map(myTradeRequest => {
+                    {myTradeRequests.length > 0 && myTradeRequests.map(myTradeRequest => {
                       const { getBook, giveBook, to, tradeResponse } = myTradeRequest
                       if (!tradeResponse) {
                         return (
@@ -87,7 +88,7 @@ class MyTrades extends Component {
               <div className='col-sm-6'>
                 <h2>Friends Requests</h2>
                 <div className='col-sm-12 friends-trade-request-container '>
-                {friendsTradeRequests && friendsTradeRequests.filter(friendsTradeRequest => friendsTradeRequest.tradeResponse !== true).map(friendsTradeRequest => {
+                {friendsTradeRequests.length > 0 && friendsTradeRequests.filter(friendsTradeRequest => friendsTradeRequest.tradeResponse !== true).map(friendsTradeRequest => {
                   const { getBook, giveBook, from } = friendsTradeRequest
                   return (
                     <div key={friendsTradeRequest._id} className='col-xs-12 trade-container'>
@@ -125,8 +126,24 @@ MyTrades.propTypes = {
 const mapStateToProps = (state) => {
   const { isAuthenticated, user } = state.userReducer
   const { tradeRequests } = state.tradeRequestReducer
-  const myTradeRequests =  tradeRequests.filter(tradeRequest => tradeRequest.from.email === user.email)
-  const friendsTradeRequests = tradeRequests.filter(tradeRequest => tradeRequest.to.email === user.email)
+  const validTradeRequests = tradeRequests.filter(tradeRequest => {
+    let { from, getBook, giveBook, to, tradeResponse } = tradeRequest
+    if (getBook !== null && giveBook !== null) {
+      if (!tradeResponse) {
+        return from.email === giveBook.owner.email && to.email === getBook.owner.email
+      } else {
+        return from.email === getBook.owner.email && to.email === giveBook.owner.email
+      }
+    }
+  })
+  const myTradeRequests =  validTradeRequests.filter(tradeRequest => {
+    let { from } = tradeRequest
+    return from.email === user.email
+  })
+  const friendsTradeRequests = validTradeRequests.filter(tradeRequest => {
+    let { to } = tradeRequest
+    return to.email === user.email
+  })
   return {
     isAuthenticated,
     myTradeRequests,

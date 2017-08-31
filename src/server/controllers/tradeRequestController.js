@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 import _ from 'lodash'
 import TradeRequest from '../models/TradeRequest'
+import { JWT_SECRET, API_KEY } from '../config'
 
 export const handle_get_requests = (req, res) => {
   TradeRequest.find()
@@ -23,9 +24,21 @@ export const handle_get_requests = (req, res) => {
   .exec((err, tradeRequests) => {
     if (err) return console.error(err)
     for (let i = 0; i < tradeRequests.length; i++) {
-      let { to, from, getBook, giveBook } = tradeRequests[i]
-      if ((to.email !== getBook.owner.email) || (from.email !== giveBook.owner.email)) {
-        tradeRequests.splice(i,1)
+      let { to, from, getBook, giveBook, _id, tradeResponse } = tradeRequests[i]
+      if (!tradeResponse) {
+        if (!getBook || !giveBook) {
+          TradeRequest.findOneAndRemove({_id: _id}, (err, tradeRequest) => {
+            if (err) return console.error(err)
+            console.log(tradeRequest)
+          })
+        } else if ((to.email !== getBook.owner.email) || (from.email !== giveBook.owner.email)) {
+          TradeRequest.findOneAndRemove({_id: _id}, (err, tradeRequest) =>{
+            if (err) return console.error(err)
+            console.log(tradeRequest)
+          })
+        } else {
+          continue
+        }
       }
     }
     res.json({tradeRequests: tradeRequests})
