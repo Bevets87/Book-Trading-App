@@ -5,7 +5,6 @@ import _ from 'lodash'
 import Book from '../models/Book'
 import TradeRequest from '../models/TradeRequest'
 
-
 export const handle_get_books = (req, res) => {
   Book.find()
   .populate('owner')
