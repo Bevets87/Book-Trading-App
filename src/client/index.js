@@ -1,20 +1,22 @@
 import React from 'react'
-import { render } from 'react-dom'
-
+import ReactDOM from 'react-dom'
+import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import store from './store/configureStore'
-import { getBooks } from './actions/bookActions'
-import { getTradeRequests } from './actions/tradeRequestActions'
+import createStore from './redux/createStore'
 
-import App from './components/App'
+import App from './App'
 
-import 'bootstrap/dist/css/bootstrap.min.css'
-import './index.scss'
+const store = createStore(window.REDUX_STATE)
 
-store.dispatch(getBooks())
-store.dispatch(getTradeRequests())
+ReactDOM.hydrate(
+  <Provider store={store} >
+    <BrowserRouter>
+      <App store={store}/>
+    </BrowserRouter>
+  </Provider>, document.getElementById('app')
+)
 
-render (
-  <Provider store={store}>
-    <App />
-  </Provider>, document.getElementById('app'))
+
+
+
+

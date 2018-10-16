@@ -1,6 +1,57 @@
 {
-  "presets": [
-      "react",
-      "es2015"
+  "env": {
+    "development": {
+        "presets": [
+          "@babel/preset-env",
+          "@babel/preset-react"
+        ],
+        "plugins": [
+          "react-hot-loader/babel",
+            [
+              "babel-plugin-styled-components",
+              {
+                "ssr": true
+              }
+            ]
+        ]
+    },
+    "production": {
+      "presets": [
+        [ "@babel/preset-env", { "modules": false } ],
+        "@babel/preset-react"
+      ],
+      "plugins": [
+          [
+            "transform-imports",
+            {
+              "lodash": {
+                "transform": "lodash/lib/${member}",
+                "preventFullImport": true
+              }
+            }
+          ],
+            [
+              "babel-plugin-styled-components",
+              {
+                "ssr": true
+              }
+            ]
+      ]
+    },
+    "testing": {
+      "presets": [
+        "@babel/preset-env",
+        "@babel/preset-react"
+      ]
+    }
+  },
+  "plugins": [
+    "universal-import",
+    "@babel/plugin-syntax-dynamic-import",
+    "@babel/plugin-transform-async-to-generator",
+    "@babel/plugin-proposal-object-rest-spread",
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-proposal-export-default-from",
+    ["babel-plugin-styled-components", { "ssr": true }]
   ]
 }

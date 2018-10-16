@@ -1,2 +1,6 @@
-/node_modules
-/src/server/config.js
+node_modules/
+config/env/dev.js
+config/env/testing.js
+
+
+
