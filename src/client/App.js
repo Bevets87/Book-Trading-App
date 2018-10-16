@@ -28,7 +28,7 @@ const AccountRouter = (props) => {
       <Route exact path={`${match.url}/incoming-trades`} component={IncomingTradesPage} />
       <Route exact path={`${match.url}/outgoing-trades`} component={OutgoingTradesPage} />
       <Route exact path={`${match.url}/change-password`} component={ChangePasswordPage} />
-      
+      <Route component={NotFound} />
     </AccountPage>
   )
 }

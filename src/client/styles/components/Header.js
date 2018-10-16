@@ -67,7 +67,7 @@ export const TabletMenuItem = styled(ButtonBase)`
 
 export const LineBreak = styled.hr`
   height: 0.1rem;
-  width: 50vw;
+  width: 50%;
   background: ${white};
 `
 
@@ -99,7 +99,7 @@ export const PhoneMenuContainer = styled.div`
 `
 export const PhoneMenuHeader = styled.div`
   height: 7rem;
-  width: 100vw;
+  width: 100%;
   text-align: right;
 `
 

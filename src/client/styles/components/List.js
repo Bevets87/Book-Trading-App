@@ -34,7 +34,7 @@ export const Body = styled.div`
   justify-content: center;
   align-items: space-between;
   width: 100%;
-  height: auto;
+  height: 100%;
   
 `
 
@@ -42,6 +42,7 @@ export const Footer = styled.div`
   width: 100%;
   height: auto;
   margin-top: 2rem;
+  margin-bottom: 1rem;
   display: flex;
   flex-direction: row;
   justify-content: center;

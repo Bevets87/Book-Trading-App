@@ -13,11 +13,15 @@ import {
 class DropDownMenu extends Component {
   constructor(props) {
     super(props)
-    const item = props.items.length ? props.items.filter(i => i.path === props.history.location.pathname)[0] : null
+    const selected = this.handleSelectionOnMount()
     this.state = {
       Menu: { mounted: false },
-      selected: item 
+      selected: selected
     }
+  }
+  handleSelectionOnMount = () => {
+    const filtered = this.props.items.filter(i => i.path === this.props.history.location.pathname)
+    return filtered.length ? filtered[0] : this.props.items[0]
   }
   componentWillUnmount() {
     this.unmountMenu()
@@ -28,48 +32,46 @@ class DropDownMenu extends Component {
   unmountMenu = () => {
     this.setState({ Menu: { mounted: false } })
   }
-  handleSelection = ({ title, path }) => {
+  handleSelectionOnClick = (selected) => {
     const { history } = this.props
-    const item = this.props.items.filter(item => item.title === title)[0] 
-    this.setState({ Menu: { mounted: false }, selected: item }, () => {
-      history.push(path)
+     this.setState({ Menu: { mounted: false }, selected }, () => {
+      history.push(selected.path)
     })
   } 
   renderMenu() {
     const { items } = this.props
     return(
       <Menu>
-        {items.map(({ title, Icon, path, _id}) => <Button key={_id} onClick={() => { this.handleSelection({ title, path }) }}><Icon/>{title}</Button>)}
+        {items.map(({ title, Icon, path, _id}) => <Button key={_id} onClick={() => { this.handleSelectionOnClick({ title, path, Icon }) }}><Icon/>{title}</Button>)}
       </Menu>
     )
   }
-  renderDropDownButton() {
+  renderDropDownMenu() {
     const { Icon, title } = this.state.selected
     return(
-      <Button onClick={this.toggleMenu}>
-        <Span><Icon/>{title}</Span>
-        <DropDownIcon/>
-      
-      </Button>
+      <Container>
+        <Button onClick={this.toggleMenu}>
+          <Span><Icon/>{title}</Span>
+          <DropDownIcon/>
+          {this.renderMenu()}
+        </Button>
+      </Container>
     )
   }
-  renderDropUpButton() {
+  renderDropUpMenu() {
     const { Icon, title } = this.state.selected
     return (
-      <Button onClick={this.toggleMenu}>
-        <Span><Icon />{title}</Span>
-        <DropUpIcon />
-      </Button>
+      <Container>
+        <Button onClick={this.toggleMenu}>
+          <Span><Icon />{title}</Span>
+          <DropUpIcon />
+        </Button>
+      </Container>
     )
   }
   render() {
     const { mounted } = this.state.Menu
-    return(
-      <Container>
-        {mounted ? this.renderDropUpButton() : this.renderDropDownButton()}
-        {mounted ? this.renderMenu() : null}
-      </Container>
-    )
+    return mounted ? this.renderDropDownMenu() : this.renderDropUpMenu()
   }
 }
 

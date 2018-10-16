@@ -23,8 +23,8 @@ export const Modal = styled.div`
   justify-content: center;
   align-items: center;
   background: ${red};
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
 `
 
 export const ModalButton = styled(ButtonBase)`

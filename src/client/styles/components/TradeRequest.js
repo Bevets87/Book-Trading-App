@@ -10,8 +10,8 @@ export const Container = styled.div`
   z-index: 1000;
   background: ${red};
   opacity: 0.95;
-  width: 100vw;
-  min-height: 100vh;
+  width: 100%;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

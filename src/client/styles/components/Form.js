@@ -5,8 +5,8 @@ import { serif } from '../typography'
 import media from '../media'
 
 export const Container = styled.div`
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -17,7 +17,7 @@ export const Container = styled.div`
     display: none;
   }
   ${media.tablet`
-    min-height: 100vh;
+    min-height: 100%;
     overflow-y: scroll;
     background: ${white};
     padding-top: 9rem;

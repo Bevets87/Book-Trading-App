@@ -13,8 +13,8 @@ import { Lock } from 'styled-icons/material/Lock.cjs'
 export const OuterContainer = styled.div`
   padding-top: 7rem;
   overflow-y: scroll;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;

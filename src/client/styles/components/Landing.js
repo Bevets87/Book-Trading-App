@@ -5,8 +5,8 @@ import { serif } from '../typography'
 import media from '../media'
 
 export const Container = styled.div`
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   background: ${opaque};
   background-attachment: fixed;
   background-size: contain;
@@ -15,8 +15,8 @@ export const Container = styled.div`
   
 `
 export const Overlay = styled.div`
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   background: ${opaque};
   display: flex;
   flex-direction: column;
