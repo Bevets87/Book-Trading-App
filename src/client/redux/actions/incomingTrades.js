@@ -41,6 +41,7 @@ export const creators = {
 export const async = {
   getAll: (skip = 0) => async (dispatch, getState, fetch) => {
     const state = getState().incomingTrades
+    dispatch(creators.loading())
     try {
       const response = await fetch.get(`/api/trades/incoming${query(skip, state.limit)}`)
       setTimeout(() => { dispatch(creators.response([ ...response.data, skip ])) }, 300)

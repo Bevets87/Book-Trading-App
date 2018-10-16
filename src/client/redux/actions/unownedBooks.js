@@ -42,6 +42,7 @@ export const async = {
   getAll: (skip = 0) => async (dispatch, getState, fetch) => {
     
     const state = getState().unownedBooks
+    dispatch(creators.loading())
     try {
       const response = await fetch.get(`/api/books${query(skip, state.limit)}`)
       setTimeout(() => { dispatch(creators.response([ ...response.data, skip ])) }, 300)

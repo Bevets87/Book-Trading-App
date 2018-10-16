@@ -31,7 +31,7 @@ export default function serverRenderer({ clientStats }) {
           </Provider>
         )
       )
-    
+      console.dir(markup)
       if (context.notFound) { 
         res.status(404) 
       } else if (context.redirect) {
@@ -43,7 +43,8 @@ export default function serverRenderer({ clientStats }) {
       const styleTags = styleSheet.getStyleTags()
       const chunkNames = flushChunkNames()
       const helmet = Helmet.renderStatic()
-      const { js } = flushChunks(clientStats, { chunkNames })
+      const { js, scripts } = flushChunks(clientStats, { chunkNames })
+      console.dir(scripts)
       const htmlString = template({ markup, js, styleTags, store, helmet })
       
       res.send(htmlString)
