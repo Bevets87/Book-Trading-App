@@ -15,7 +15,10 @@ const db = {
   url: process.env.MONGODB_URI
 }
 
+const baseURL = process.env.BASE_URL
+
 module.exports = {
+  baseURL,
   host,
   port,
   jwt,
