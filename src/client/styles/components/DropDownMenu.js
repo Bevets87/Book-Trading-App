@@ -10,10 +10,8 @@ export const Container = styled.div`
   display: none;
   ${media.tablet`
     position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
+    display: block;
+    text-align: center;
     width: 100%;
     height: auto;
     background: ${white};

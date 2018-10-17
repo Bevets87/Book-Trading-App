@@ -8,11 +8,8 @@ const colors = { red, white, black, green }
 
 export const Form = styled.form`
   position: relative;
-  display: flex;
-  margin-top: 2rem;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  display: block;
+  margin: 2rem auto;
   width: 80%;
   height: auto;
   padding: 1rem;
@@ -20,6 +17,7 @@ export const Form = styled.form`
   background: ${white};
   border: 0.2rem solid ${black};
   border-radius: 0.5rem;
+  
   &::-webkit-scrollbar {
     display: none;
   }

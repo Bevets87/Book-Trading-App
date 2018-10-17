@@ -52,9 +52,9 @@ class DropDownMenu extends Component {
       <Container>
         <Button onClick={this.toggleMenu}>
           <Span><Icon/>{title}</Span>
-          <DropDownIcon/>
-          {this.renderMenu()}
+          <DropUpIcon/>
         </Button>
+        {this.renderMenu()}
       </Container>
     )
   }
@@ -64,7 +64,7 @@ class DropDownMenu extends Component {
       <Container>
         <Button onClick={this.toggleMenu}>
           <Span><Icon />{title}</Span>
-          <DropUpIcon />
+          <DropDownIcon />
         </Button>
       </Container>
     )

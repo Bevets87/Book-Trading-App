@@ -21,7 +21,7 @@ const pages = {
 
 const UniversalComponent = (props) => {
   const Page = pages[props.page] || NotFound
-  return <Page isLoading={false} error={null} {...props} />
+  return <Page  {...props} />
 }
 
 UniversalComponent.propTypes = {

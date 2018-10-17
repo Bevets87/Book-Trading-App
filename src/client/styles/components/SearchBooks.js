@@ -72,31 +72,28 @@ export const BookButtons = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: auto;
+  height: 10rem;
   width: 100%;
   
 `
 
 export const ResultsBox = styled.div`
   width: 100%;
-  height: auto;
+  height: 100%;
   display: flex;
+  margin: 2rem auto;
   flex-direction: column;
-  justify-content: flex-start;
   align-items: center;
+  justify-content: flex-start;
+  
 
 `
 export const BookBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
+  display: block;
   width: 80%;
   height: auto;
-  ${media.tablet`
-    margin-top: 2rem;
-    width: 100%;
-`}
+  text-align: center;
+
 
 `
 
