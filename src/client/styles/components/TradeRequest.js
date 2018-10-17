@@ -1,22 +1,26 @@
 import styled from 'styled-components'
 import ButtonBase from '../base/Button'
+import { BookOpen } from 'styled-icons/feather/BookOpen.cjs'
 import { serif } from '../typography'
 import { red, white, black } from '../colors'
+import media from '../media'
 
 export const Container = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 1000;
+  
+  z-index: 1000000;
   background: ${red};
-  opacity: 0.95;
+  opacity: 0.98;
   width: 100%;
   min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
+  display: block;
+  text-align: center;
   overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `
 
 
@@ -26,8 +30,9 @@ export const Header = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 90%;
+  width: 100%;
   background: ${red};
+  margin: 0 auto;
 
  
  
@@ -72,13 +77,58 @@ export const Buttons = styled.div`
   height: auto;
   margin-top: 3rem;
   padding-bottom: 2rem;
+  margin: 0 auto;
  
 `
 
 
 
 export const Box = styled.div`
-  margin-top: 3rem;
+  display: flex;
+  margin: 2rem auto;
+  width: 80%;
+  height: auto;
+
+`
+export const BookIconContainer = styled(ButtonBase)`
+  background: rgba(0,0,0,0);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 10rem;
+  width: auto;
+  font-size: 5rem;
+  font-weight: bold;
+  color: ${white};
+  ${media.tablet`
+    font-size: 4rem;
+    height: 9rem;
+  `}
+  ${media.phone`
+    font-size: 3rem;
+    height: 8rem;
+  `}
+
+`
+
+export const BlackBookIcon = styled(BookOpen)`
+  stroke: ${black};
+  height: 10rem;
+  width: auto;
+  fill: rgba(0,0,0,0);
+  transition: all 0.25s;
+  ${BookIconContainer}:hover & {
+    fill: ${white};
+    
+  
+  }
+  ${media.tablet`
+    height: 9rem;
+  `}
+  ${media.phone`
+    height: 8rem;
+  `}
 `
 
 

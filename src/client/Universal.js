@@ -1,31 +1,28 @@
-import React from 'react'
 import universal from 'react-universal-component'
-import { string } from 'prop-types'
 import NotFound from './components/NotFound'
+import Spinner from './components/Spinner'
 
 const pages = {
-  Landing: universal(() => import('./containers/Landing')),
-  UnownedBooks: universal(() => import('./containers/UnownedBooks')),
-  SignIn: universal(() => import('./containers/SignIn')),
-  SignUp: universal(() => import('./containers/SignUp')),
-  EditProfile: universal(() => import('./containers/EditProfile')),
-  ChangePassword: universal(() => import('./containers/ChangePassword')),
-  SearchBooks: universal(() => import('./containers/SearchBooks')),
-  OwnedBooks: universal(() => import('./containers/OwnedBooks')),
-  IncomingTrades: universal(() => import('./containers/IncomingTrades')),
-  OutgoingTrades: universal(() => import('./containers/OutgoingTrades')),
-  Account: universal(() => import('./containers/Account')),
-  TradeRequest: universal(() => import('./containers/TradeRequest')),
-  NotFound
+  Landing: () => import('./containers/Landing'),
+  UnownedBooks: () => import('./containers/UnownedBooks'),
+  SignIn: () => import('./containers/SignIn'),
+  SignUp: () => import('./containers/SignUp'),
+  EditProfile: () => import('./containers/EditProfile'),
+  ChangePassword: () => import('./containers/ChangePassword'),
+  SearchBooks: () => import('./containers/SearchBooks'),
+  OwnedBooks: () => import('./containers/OwnedBooks'),
+  IncomingTrades: () => import('./containers/IncomingTrades'),
+  OutgoingTrades: () => import('./containers/OutgoingTrades'),
+  TradeRequest: () => import('./containers/TradeRequest')
 }
 
-const UniversalComponent = (props) => {
-  const Page = pages[props.page] || NotFound
-  return <Page  {...props} />
-}
 
-UniversalComponent.propTypes = {
-  page: string
-}
+const determineHowToLoad = ({ page }) => pages[page]()
+
+const UniversalComponent = universal(determineHowToLoad, {
+  minDelay: 300,
+  loading: Spinner,
+  error: NotFound 
+})
 
 export default UniversalComponent

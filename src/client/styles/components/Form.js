@@ -42,7 +42,6 @@ export const Form = styled.form`
     padding-top: 0;
     border: none;
     border-radius: 0;
-    height: 100%;
     width: 95%;
   `}
 `

@@ -45,7 +45,7 @@ export const TabletMenu = styled.div`
   width: 30%;
   height: 7rem;
 
-  ${media.phone`
+  ${media.tablet`
     display: none;
   `}
 `
@@ -170,7 +170,7 @@ export const BookIconTitle = styled.span`
 
 export const SettingsIconContainer = styled(ButtonBase)`
   display: none;
-  ${media.phone`
+  ${media.tablet`
     display: flex;
     background: ${white};
     width: auto;

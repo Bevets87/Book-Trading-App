@@ -43,7 +43,7 @@ export default function serverRenderer({ clientStats }) {
       const styleTags = styleSheet.getStyleTags()
       const chunkNames = flushChunkNames()
       const helmet = Helmet.renderStatic()
-      const { js, scripts } = flushChunks(clientStats, { chunkNames })
+      const { js } = flushChunks(clientStats, { chunkNames })
       
       const htmlString = template({ markup, js, styleTags, store, helmet })
       

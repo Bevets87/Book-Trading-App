@@ -13,13 +13,12 @@ export const Container = styled.div`
   display: flex;
   height: 15rem;
   width: 100%;
-  margin-top: 1rem;
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
   background: ${white};
   border: 0.25rem solid ${black};
- 
+  margin-top: 1rem;
 
    
 `
@@ -29,7 +28,7 @@ export const Column = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-evenly;
-  margin-top: 0.2rem;
+  
   height: 100%;
 `
 
@@ -38,7 +37,7 @@ export const Row = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  margin-top: 0.2rem;
+  
 `
 
 export const Title = styled.h1`
@@ -64,7 +63,7 @@ export const Underline = styled.span`
 
 export const HiLite = styled.span`
   color: ${black};
-  
+  font-size: 1.3rem;
   background: ${red};
   border-radius: 0.2rem;
 `

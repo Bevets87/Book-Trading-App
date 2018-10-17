@@ -32,7 +32,7 @@ export const Body = styled.div`
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: center;
-  align-items: space-between;
+  align-items: space-evenly;
   width: 100%;
   height: 100%;
   

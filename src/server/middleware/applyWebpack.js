@@ -20,7 +20,7 @@ export const runInDevelopment = (app) => {
   app.use(catchAllErrorware)
   
   devMiddleware.waitUntilValid(() => {
-    app.listen(config.port, () => { logger.info(`listening on port ${config.port}`)})
+    app.listen(config.port, config.host, () => { logger.info(`listening on port ${config.port}`)})
   })
 }
 
@@ -35,7 +35,7 @@ export default (app) => {
       app.use(expressStaticGzip(path.join(process.cwd(), 'dist', 'client')))
       app.use(renderer({ clientStats }))
       app.use(catchAllErrorware)
-      app.listen(config.port, () => { logger.info(`listening on port ${config.port}`) })
+      app.listen(config.port, config.host, () => { logger.info(`listening on port ${config.port}`) })
     })
   }
 }

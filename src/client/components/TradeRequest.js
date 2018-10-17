@@ -3,7 +3,7 @@ import { func, object, array, number, bool, string } from 'prop-types'
 
 import PaginatedList from '../hocs/PaginatedList'
 
-import { Container, Title, Buttons, Button, Header, Box } from '../styles/components/TradeRequest'
+import { Container, Buttons, Button, Header, Box, BookIconContainer, BlackBookIcon } from '../styles/components/TradeRequest'
 import { Container as Book, Cover, Button as BookButton, LineThrough } from '../styles/components/Book'
 
 export const BookToTrade = ({ tradeable, onClick, image, _id, selected  }) => {
@@ -63,7 +63,7 @@ class TradeRequest extends Component {
     return(
       <Container>
         <Header>
-          <Title>Select a book to trade</Title>
+          <BookIconContainer><BlackBookIcon />Select a book to trade</BookIconContainer>
         </Header>
         <Box>
           <PaginatedList response={ownedBooks} fetch={fetch} count={count} skip={skip} limit={limit}>
