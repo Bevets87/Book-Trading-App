@@ -1,4 +1,3 @@
 import Landing from '../components/Landing'
 
-export default Landing
- 
+export default Landing 

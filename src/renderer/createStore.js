@@ -8,7 +8,7 @@ import getData from './getData'
 
 export default async (req, reducers) => {
   const fetch = axios.create({
-    baseURL: `http://${config.host}:${config.port}`,
+    baseURL: `${config.host}:${config.port}`,
     headers: { cookie: req.get('cookie') || '' }
   })
   

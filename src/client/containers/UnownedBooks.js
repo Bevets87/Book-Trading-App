@@ -12,6 +12,7 @@ import UnownedBook from '../components/UnownedBook'
 import PaginatedList from '../hocs/PaginatedList'
 import TradeRequestPage from '../pages/TradeRequest'
 
+
 import {
   PulsatingBook, 
   Centered,
@@ -106,13 +107,7 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps)
-
 export default compose(withConnect, withFetch)({ Success, Loading, Failure })
-
-
-
-
-
 
 
 

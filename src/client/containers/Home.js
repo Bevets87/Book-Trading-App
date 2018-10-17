@@ -5,11 +5,11 @@ import { Helmet } from 'react-helmet'
 import LandingPage from '../pages/Landing'
 import UnownedBooksPage from '../pages/UnownedBooks'
 
-const HomeComponent = withAuth({ Auth: UnownedBooksPage, Unauth: LandingPage })
+const Home = withAuth({ Auth: UnownedBooksPage, Unauth: LandingPage })
 
 class HomeContainer extends React.Component {
   renderHead() {
-    return(
+    return (
       <Helmet>
         <title>Booktrader</title>
         <meta property="og:title" content="Booktrader" />
@@ -17,10 +17,10 @@ class HomeContainer extends React.Component {
     )
   }
   renderBody() {
-    return <HomeComponent {...this.props} />
+    return <Home {...this.props} />
   }
   render() {
-    return(
+    return (
       <div>
         {this.renderHead()}
         {this.renderBody()}
@@ -29,4 +29,4 @@ class HomeContainer extends React.Component {
   }
 }
 
-export default HomeContainer
+export default HomeContainer 

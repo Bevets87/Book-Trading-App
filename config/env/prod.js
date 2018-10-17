@@ -5,7 +5,7 @@ const jwt = {
 
 const port = process.env.PORT
 
-
+const host = process.env.HOST
 
 const goodreads = { 
   key: process.env.GOODREADS_KEY,
@@ -16,6 +16,7 @@ const db = {
 }
 
 module.exports = {
+  host,
   port,
   jwt,
   goodreads,
