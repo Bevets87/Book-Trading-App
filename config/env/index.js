@@ -1,9 +1,3 @@
-const { merge } = require('lodash')
-
-let baseConfig = {
-  port: 3000
-}
-
 let envConfig
 
 if (process.env.NODE_ENV === 'development') {
@@ -19,4 +13,4 @@ else {
   envConfig = require('./dev')
 }
 
-module.exports = merge(baseConfig, envConfig)
+module.exports = envConfig 
