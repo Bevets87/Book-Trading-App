@@ -1,8 +1,7 @@
 const { merge } = require('lodash')
 
 let baseConfig = {
-  port: 3000,
-  host: 'localhost'
+  port: 3000
 }
 
 let envConfig
