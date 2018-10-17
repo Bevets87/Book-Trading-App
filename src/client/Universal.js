@@ -4,7 +4,6 @@ import Spinner from './components/Spinner'
 
 const pages = {
   Landing: () => import('./containers/Landing'),
-  UnownedBooks: () => import('./containers/UnownedBooks'),
   SignIn: () => import('./containers/SignIn'),
   SignUp: () => import('./containers/SignUp'),
   EditProfile: () => import('./containers/EditProfile'),
@@ -12,15 +11,14 @@ const pages = {
   SearchBooks: () => import('./containers/SearchBooks'),
   OwnedBooks: () => import('./containers/OwnedBooks'),
   IncomingTrades: () => import('./containers/IncomingTrades'),
-  OutgoingTrades: () => import('./containers/OutgoingTrades'),
-  TradeRequest: () => import('./containers/TradeRequest')
+  OutgoingTrades: () => import('./containers/OutgoingTrades')
 }
 
 
 const determineHowToLoad = ({ page }) => pages[page]()
 
 const UniversalComponent = universal(determineHowToLoad, {
-  minDelay: 300,
+  minDelay: 500,
   loading: Spinner,
   error: NotFound 
 })

@@ -6,11 +6,15 @@ import unownedBooksActions from '../redux/actions/unownedBooks'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import withFetch from '../hocs/withFetch'
+import withDynamicImport from '../hocs/withDynamicImport'
+
 
 import Container from '../styles/base/Container'
 import UnownedBook from '../components/UnownedBook'
 import PaginatedList from '../hocs/PaginatedList'
-import TradeRequestPage from '../pages/TradeRequest'
+import Spinner from '../components/Spinner'
+
+const ImportedTradeRequest = withDynamicImport(() => import('./TradeRequest'), { Loading: Spinner })
 
 
 import {
@@ -55,7 +59,7 @@ class Success extends React.Component {
   }
   renderTradeRequest = () => {
     const { bookToGet } = this.state.TradeRequest 
-    return <TradeRequestPage bookToGet={bookToGet} unmount={this.unmountTradeRequest} />  
+    return <ImportedTradeRequest bookToGet={bookToGet} unmount={this.unmountTradeRequest} />  
   }
   mountTradeRequest = (bookToGet) => {
     
@@ -108,6 +112,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps)
 export default compose(withConnect, withFetch)({ Success, Loading, Failure })
+
 
 
 

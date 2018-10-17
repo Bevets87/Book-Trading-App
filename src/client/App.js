@@ -6,7 +6,8 @@ import { hot } from 'react-hot-loader'
 import GlobalStyles from './styles/global'
 
 import HeaderContainer from './containers/Header'
-import HomeContainer from './containers/Home'
+import LandingPage from './pages/Landing'
+
 import SignInPage from './pages/SignIn'
 import SignUpPage from './pages/SignUp'
 import AccountRouter from './Account'
@@ -19,7 +20,7 @@ class App extends Component {
         <GlobalStyles />
         <HeaderContainer />
         <Switch>
-          <Route exact path='/' component={HomeContainer} />
+          <Route exact path='/' component={LandingPage} />
           <Route exact path='/signin' component={SignInPage} />
           <Route exact path='/signup' component={SignUpPage} />
           <Route path='/account' component={AccountRouter} />
