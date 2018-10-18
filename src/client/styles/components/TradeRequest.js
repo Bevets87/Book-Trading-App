@@ -12,13 +12,14 @@ export const Container = styled.div`
   
   z-index: 1000000;
   background: ${red};
-  opacity: 0.98;
-  width: 100%;
-  min-height: 100%;
+
+  width: 100vw;
+  min-height: 100vh;
   display: block;
   text-align: center;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;  // IE 10+
   &::-webkit-scrollbar {
     display: none;
   }

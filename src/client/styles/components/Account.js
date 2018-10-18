@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { red, white, black } from '../colors'
+import { red, white, black, opaque } from '../colors'
 import ButtonBase from '../base/Button'
 import media from '../media'
 import { UserCog } from 'styled-icons/fa-solid/UserCog.cjs'
@@ -13,15 +13,21 @@ import { Lock } from 'styled-icons/material/Lock.cjs'
 export const OuterContainer = styled.div`
   padding-top: 7rem;
   overflow-y: scroll;
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  background: linear-gradient(rgba(0,0,0,0.8), black);
+  background: ${opaque};
+  
   box-sizing: border-box;
   overflow-x: hidden;
+   -ms-overflow-style: none;  // IE 10+
+ 
+  &::-webkit-scrollbar {
+    display: none;
+  }
   ${media.tablet`
     background: ${red};
   `}
@@ -33,9 +39,10 @@ export const InnerContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
+  
+
   ${media.tablet`
     width: 100%;
-    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -96,44 +103,65 @@ export const DesktopMenuAvatar = styled(ButtonBase)`
 export const UserIcon = styled(UserCog)`
   height: 10rem;
   width: auto;
+  display: block;
 `
 export const EditIcon = styled(Edit)`
+  display: block;
   height: 100%;
   width: auto; 
 `
 export const SearchIcon = styled(Search)`
   height: 100%;
-  width: auto; 
+  width: auto;
+  display: block; 
 `
 
 export const OutgoingIcon = styled(LongArrowAltLeft)`
   height: 100%;
   width: auto;
+  display: block;
 `
 export const IncomingIcon = styled(LongArrowAltRight)`
   height: 100%;
   width: auto;
+  display: block;
 `
 
 export const BookIcon = styled(Book)`
   height: 100%;
   width: auto;
+  display: block;
 `
 export const LockIcon = styled(Lock)`
   height: 100%;
   width: auto;
+  display: block;
 `
 
 export const Span = styled.span`
   color: inherit;
   font-size: inherit;
+  height: 100%;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
 `
 
 export const PageContainer = styled.div`
   display: block;
   width: 60%;
-  height: 100%;
+  max-height: 100%;
+  background: ${red};
+  overflow-x: hidden;
+  -ms-overflow-style: none;  // IE 10+
+ 
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  overflow-y: scroll;
   ${media.tablet`
     width: 100%;
     height: 90%;

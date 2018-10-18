@@ -43,19 +43,11 @@ class ChangePassword extends Component {
   }
   renderSuccessMessage() {
     const { response } = this.props 
-    return(
-      <MessageBox>
-        <HiLite color={'green'}>{response.message}</HiLite>
-      </MessageBox>
-    )
+    return <HiLite color={'green'}>{response.message}</HiLite>
   }
   renderFailureMessage() {
     const { error } = this.props 
-    return(
-      <MessageBox>
-        <HiLite color={'red'}>{error.message}</HiLite>
-      </MessageBox>
-    )
+    return <HiLite color={'red'}>{error.message}</HiLite>
   }
   render() {
     return(
@@ -70,8 +62,10 @@ class ChangePassword extends Component {
           <Input type='password' name='new password confirmation' onChange={this.handleOnChange} />
 
           <Button onClick={this.handleClick}>Change password</Button>
-          {this.props.error ? this.renderFailureMessage() : null}
-          {this.props.response ? this.renderSuccessMessage() : null}
+          <MessageBox>
+            {this.props.response ? this.renderSuccessMessage() : null}
+            {this.props.error ? this.renderFailureMessage() : null}
+          </MessageBox>
         </Form>
 
     )

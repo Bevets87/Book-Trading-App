@@ -42,7 +42,7 @@ class DropDownMenu extends Component {
     const { items } = this.props
     return(
       <Menu>
-        {items.map(({ title, Icon, path, _id}) => <Button key={_id} onClick={() => { this.handleSelectionOnClick({ title, path, Icon }) }}><Icon/>{title}</Button>)}
+        {items.map(({ title, Icon, path, _id}) => <Button key={_id} onClick={() => { this.handleSelectionOnClick({ title, path, Icon }) }}><Icon/><Span>{title}</Span></Button>)}
       </Menu>
     )
   }
@@ -51,8 +51,10 @@ class DropDownMenu extends Component {
     return(
       <Container>
         <Button onClick={this.toggleMenu}>
-          <Span><Icon/>{title}</Span>
+          <Icon />
+          <Span>{title}</Span>
           <DropUpIcon/>
+          
         </Button>
         {this.renderMenu()}
       </Container>
@@ -63,7 +65,8 @@ class DropDownMenu extends Component {
     return (
       <Container>
         <Button onClick={this.toggleMenu}>
-          <Span><Icon />{title}</Span>
+          <Icon />
+          <Span>{title}</Span>
           <DropDownIcon />
         </Button>
       </Container>

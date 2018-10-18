@@ -27,12 +27,13 @@ export const Button = styled(ButtonBase)`
   height: 5rem;
   color: ${red};
   font-size: 2.5rem;
-  border: 0.2rem solid ${black};
+  border: 0.2rem solid blue;
   transition: all 0.25s;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center; 
+  border: 0.1rem solid ${black};
   
   &:hover {
     background: ${red};
@@ -69,12 +70,13 @@ export const DropUpIcon = styled(ArrowDropUp)`
 
 export const Span = styled.span`
   height: 100%;
-  width: inherit;
-  font-size: inherit;
+  width: 100%;
+  font-size: 3rem;
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  
 
 
 `

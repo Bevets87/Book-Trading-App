@@ -17,7 +17,7 @@ export const Form = styled.form`
   background: ${white};
   border: 0.2rem solid ${black};
   border-radius: 0.5rem;
-  
+  -ms-overflow-style: none;  // IE 10+
   &::-webkit-scrollbar {
     display: none;
   }
@@ -59,15 +59,13 @@ export const Label = styled.label`
 `
 
 export const MessageBox = styled.div`
-  position: absolute;
+
   width: 100%;
-  height: auto;
-  left: 0;
-  bottom: 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  height: 3rem;
+
+  display: block;
+  text-align: center;
+ 
   
 `
 

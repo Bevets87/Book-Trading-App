@@ -7,6 +7,6 @@ export default styled.nav`
   position: fixed;
   left: 0;
   top: 0;
-  width: 100%;
+  width: 100vw;
   height: 7rem;
 `

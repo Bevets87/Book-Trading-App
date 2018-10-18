@@ -15,7 +15,6 @@ export const Nav = styled(NavBase)`
   justify-content: space-around;
   align-items: center;
   background: ${white};
-  height: 7rem;
   border-bottom: 0.2rem solid ${black};
   ${media.tablet`
     justify-content: space-between;
@@ -122,6 +121,9 @@ export const PhoneMenuTitle = styled(ButtonBase)`
   &:hover {
     color: ${red};
   }
+  ${media.phone`
+    font-size: 4.5rem;
+  `}
 `
 
 export const PhoneMenuItem = styled(ButtonBase)`
@@ -133,6 +135,9 @@ export const PhoneMenuItem = styled(ButtonBase)`
   &:hover {
     color: ${red};
   }
+  ${media.phone`
+    font-size: 2.75rem;
+  `}
   
  
 `

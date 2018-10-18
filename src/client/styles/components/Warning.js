@@ -3,8 +3,8 @@ import { red, white, black } from '../colors'
 import ButtonBase from '../base/Button'
 
 export const Container = styled.div`
-  width: 100%;
-  height: 100%;
+  width: ${props => props.width ? props.width : '100%' };
+  height: ${props => props.height ? props.height : '100%' };
   background: ${red};
   display: flex;
   flex-direction: column;

@@ -12,6 +12,7 @@ export const Container = styled.div`
   align-items: center;
   background: ${red};
   overflow-y: scroll;
+  -ms-overflow-style: none;  // IE 10+
   &::-webkit-scrollbar {
     display: none;
   }

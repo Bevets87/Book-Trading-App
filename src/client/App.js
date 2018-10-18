@@ -24,7 +24,7 @@ class App extends Component {
           <Route exact path='/signin' component={SignInPage} />
           <Route exact path='/signup' component={SignUpPage} />
           <Route path='/account' component={AccountRouter} />
-          <Route component={NotFound} />
+          <Route render={(props) => <NotFound width='100vw' height={'100vh'} {...props}/>} />
         </Switch>
       </div>
     )

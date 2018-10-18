@@ -1,12 +1,12 @@
 import React from 'react'
-import { object, func } from 'prop-types'
+import { object, func, string } from 'prop-types'
 import parseError from '../utils/parseError'
 
 import { Container, Text, Button } from '../styles/components/Warning'
 
-const Warning = ({ error, reset }) => {
+const Warning = ({ error, reset, width = null, height = null }) => {
   return(
-    <Container>
+    <Container width={width} height={height}>
       <Text>{parseError(error)}</Text>
       <Button onClick={() => { reset() }}>Got It!</Button>
     </Container>
@@ -15,7 +15,9 @@ const Warning = ({ error, reset }) => {
 
 Warning.propTypes = {
   error: object,
-  reset: func  
+  reset: func,
+  width: string,
+  height: string   
 }
 
 export default Warning 

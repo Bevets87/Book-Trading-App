@@ -6,7 +6,7 @@ import { Container, Form, Title, Label, Input, Button, ErrorMessage, ErrorContai
 class SignIn extends Component {
   state = { username: '', password: '' }
   renderErrorMessage = () => {
-    return <ErrorContainer><ErrorMessage>{this.props.error.message}</ErrorMessage></ErrorContainer>
+    return <ErrorMessage>{this.props.error.message}</ErrorMessage>
   }
   componentWillUnmount() {
     this.props.clearError()
@@ -41,7 +41,7 @@ class SignIn extends Component {
           <Input type='password' name='password'value={password} onChange={this.handleOnChange} />
 
           <Button onClick={this.handleSubmit}>Submit</Button>
-          {this.props.error ? this.renderErrorMessage() : null}
+          <ErrorContainer>{this.props.error ? this.renderErrorMessage() : null}</ErrorContainer>
         </Form>
       </Container>
     )

@@ -40,7 +40,7 @@ class SignUp extends Component {
     this.props.signUpUser(this.state)
   }
   renderErrorMessage() {
-    return <ErrorContainer><ErrorMessage>{this.props.error.message}</ErrorMessage></ErrorContainer>
+    return <ErrorMessage>{this.props.error.message}</ErrorMessage>
   }
   render() {
     let { username, password, passwordConfirmation, city, st8 } = this.state 
@@ -64,7 +64,7 @@ class SignUp extends Component {
           <Input type='text' name='st8' value={st8} onChange={this.handleOnChange} />
         
           <Button onClick={this.handleSubmit}>Submit</Button>
-          {this.props.error ? this.renderErrorMessage() : null}
+          <ErrorContainer>{this.props.error ? this.renderErrorMessage() : null}</ErrorContainer>
         </Form>
       </Container>
     )

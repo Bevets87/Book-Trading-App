@@ -5,8 +5,8 @@ import { serif } from '../typography'
 import media from '../media'
 
 export const Container = styled.div`
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   background: ${opaque};
   background-attachment: fixed;
   background-size: contain;
@@ -15,8 +15,8 @@ export const Container = styled.div`
   
 `
 export const Overlay = styled.div`
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   background: ${opaque};
   display: flex;
   flex-direction: column;
@@ -50,8 +50,6 @@ export const Button = styled(ButtonBase)`
   background: ${white};
   color: ${red};
   font-size: 4rem;
-  width: auto;
-  height: auto;
   margin: 0 auto;
   padding: 2rem;
   border: 0.2rem solid ${red} !important;

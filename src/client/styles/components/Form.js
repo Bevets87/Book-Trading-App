@@ -5,22 +5,24 @@ import { serif } from '../typography'
 import media from '../media'
 
 export const Container = styled.div`
-  min-height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background: ${red};
   padding-top: 7rem;
+  -ms-overflow-style: none;  // IE 10+
+ 
   &::-webkit-scrollbar {
     display: none;
   }
   ${media.tablet`
-    min-height: 100%;
+    
     overflow-y: scroll;
     background: ${white};
-    padding-top: 9rem;
+  
   `}
 `
 export const Form = styled.form`
@@ -30,10 +32,12 @@ export const Form = styled.form`
   width: 60rem;
   height: auto;
   padding: 1rem;
-  padding-bottom: 5rem;
+  padding-bottom: 2rem;
   background: ${white};
   border: 0.2rem solid ${black};
   border-radius: 0.5rem;
+  -ms-overflow-style: none; 
+  overflow: -moz-scrollbars-none; 
   &::-webkit-scrollbar {
     display: none;
   }
@@ -75,14 +79,10 @@ export const Label = styled.label`
 `
 
 export const ErrorContainer = styled.div`
-  position: absolute;
-  bottom: 0;
-  left: 0;
   width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  height: 3rem;
+  display: block;
+  text-align: center;
 `
 
 export const ErrorMessage = styled.span`

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { object } from 'prop-types'
+import { object, string } from 'prop-types'
 import { Redirect } from 'react-router-dom'
 import { Container, Text, Button } from '../styles/components/Warning'
 
@@ -12,8 +12,9 @@ class NotFound extends Component {
     return <Redirect to='/' />
   }
   renderNotFound() {
+    const { width = null, height = null } = this.props 
     return(
-      <Container>
+      <Container width={width} height={height}>
         <Text>404 Not Found</Text>
         <Button onClick={this.redirect}>Go Home</Button>
       </Container>
@@ -28,7 +29,9 @@ class NotFound extends Component {
 }
 
 NotFound.propTypes = {
-  staticContext: object
+  staticContext: object,
+  width: string,
+  height: string 
 }
 
 export default NotFound
