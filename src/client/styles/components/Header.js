@@ -84,14 +84,17 @@ export const BookIconContainer = styled(ButtonBase)`
 export const PhoneMenuContainer = styled.div`
     display: none;
   ${media.tablet`
-    position: fixed;
-    display: flex;
+    position: absolute;
     top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    width: 100%;
-    height: 100%;
+    min-width: 100vw;
+    min-height: 100vh;
     background: ${black};
     opacity: 0.95;
   `}

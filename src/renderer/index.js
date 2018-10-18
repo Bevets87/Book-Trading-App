@@ -4,7 +4,7 @@ import { renderToString } from 'react-dom/server'
 import { StaticRouter } from 'react-router-dom'
 import { ServerStyleSheet } from 'styled-components'
 import { Helmet } from 'react-helmet'
-import { clearChunks, flushChunkNames } from 'react-universal-component/server'
+import { flushChunkNames } from 'react-universal-component/server'
 import flushChunks from 'webpack-flush-chunks'
 import template from './template'
 import { Provider } from 'react-redux'
@@ -15,9 +15,7 @@ import reducers from '../client/redux/reducers'
 
 
 export default function serverRenderer({ clientStats }) {
-  return async (req, res, next) => {
-      clearChunks()
-      
+  return async (req, res) => {
       const context = {}
       const styleSheet = new ServerStyleSheet()
       const store = await createStore(req, reducers)

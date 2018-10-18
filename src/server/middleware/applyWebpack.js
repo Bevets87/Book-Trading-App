@@ -1,4 +1,4 @@
-import expressStaticGzip from 'express-static-gzip'
+import express from 'express'
 import logger from '../logger'
 import catchAllErrorware from '../errorware/catchAll'
 import webpack from 'webpack'
@@ -29,10 +29,9 @@ export default (app) => {
     runInDevelopment(app)
   } else {
     webpack([clientConfig, rendererConfig]).run((err, stats) => {
-      const path = require('path')
       const renderer = require('../../../dist/renderer.bundle.js').default
       const clientStats = stats.toJson().children[0]
-      app.use(expressStaticGzip(path.join(process.cwd(), 'dist', 'client')))
+      app.use(express.static(clientConfig.output.path))
       app.use(renderer({ clientStats }))
       app.use(catchAllErrorware)
       app.listen(config.port, () => { logger.info(`listening on port ${config.port}`) })

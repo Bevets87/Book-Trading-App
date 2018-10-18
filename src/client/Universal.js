@@ -1,5 +1,4 @@
 import universal from 'react-universal-component'
-import NotFound from './components/NotFound'
 import Spinner from './components/Spinner'
 
 const pages = {
@@ -20,7 +19,7 @@ const determineHowToLoad = ({ page }) => pages[page]()
 const UniversalComponent = universal(determineHowToLoad, {
   minDelay: 500,
   loading: Spinner,
-  error: NotFound 
+  error: null
 })
 
 export default UniversalComponent
