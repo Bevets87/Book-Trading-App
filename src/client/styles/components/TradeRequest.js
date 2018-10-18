@@ -18,6 +18,7 @@ export const Container = styled.div`
   display: block;
   text-align: center;
   overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
   &::-webkit-scrollbar {
     display: none;
   }

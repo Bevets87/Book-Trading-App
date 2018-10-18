@@ -31,7 +31,7 @@ export const fadeInFromSide = (target) => {
     duration, 
     { 
       opacity: 0, 
-      width: 0,
+      minWidth: 0,
     }
   )
 }
@@ -42,7 +42,7 @@ export const fadeOutToSide = (target) => {
     duration,
     {
       opacity: 0,
-      width: 0,
+      minWidth: 0,
     }
   )
 }
