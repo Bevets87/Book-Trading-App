@@ -1,4 +1,3 @@
-const webpack = require('webpack')
 const path = require('path')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 //const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
@@ -37,7 +36,6 @@ module.exports = {
     rules: [ imgRules ]
   },
   plugins: [
-    new webpack.DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) }),
     new CompressionWebpackPlugin({
       algorithm: 'gzip'
     })
