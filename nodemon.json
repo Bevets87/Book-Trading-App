@@ -1,5 +1,5 @@
 {
   "verbose": false,
-  "watch": [ "./src/server" ],
-  "exec": "cross-env NODE_ENV=development webpack --config config/webpack/server && node dist/server.bundle.js"
+  "watch": [ "./server" ],
+  "exec": "cross-env NODE_ENV=development node server"
 }
