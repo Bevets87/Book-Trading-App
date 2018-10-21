@@ -4,7 +4,6 @@ const catchAllErrorware = require('../errorware/catchAll')
 const webpack = require('webpack')
 const clientConfig = require('../../config/webpack/client')
 const serverRendererConfig = require('../../config/webpack/serverRenderer')
-const config = require('../../config/env')
 
 const runInDevelopment = (app) => {
   const webpackDevMiddleware = require('webpack-dev-middleware')
@@ -20,7 +19,7 @@ const runInDevelopment = (app) => {
   app.use(catchAllErrorware)
   
   devMiddleware.waitUntilValid(() => {
-    app.listen(config.port, () => { logger.info(`listening on port ${config.port}`)})
+    app.listen(3000, () => { logger.info('listening on port 3000')} )
   })
 }
 
@@ -34,7 +33,7 @@ module.exports = (app) => {
       app.use(express.static(clientConfig.output.path))
       app.use(serverRenderer({ clientStats }))
       app.use(catchAllErrorware)
-      app.listen(config.port, () => { logger.info(`listening on port ${config.port}`) })
+      app.listen(process.env.PORT, () => { logger.info(`listening on port ${process.env.PORT}`) })
     })
   }
 }

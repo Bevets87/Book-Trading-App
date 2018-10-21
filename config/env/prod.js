@@ -3,7 +3,6 @@ const jwt = {
   expiration: process.env.JWT_EXPIRATION
 }
 
-const port = process.env.PORT
 
 const host = process.env.HOST
 
@@ -20,7 +19,6 @@ const baseURL = process.env.BASE_URL
 module.exports = {
   baseURL,
   host,
-  port,
   jwt,
   goodreads,
   db
