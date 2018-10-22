@@ -2,7 +2,7 @@
   "name": "book-trading-app",
   "version": "1.0.0",
   "description": "an application that allows users to login and trade books",
-  "main": "server/index.js",
+  "main": "./server/index.js",
   "scripts": {
     "remove:build": "rimraf dist",
     "dev": "npm run remove:build && nodemon",
@@ -10,7 +10,7 @@
     "prod:build:client": "cross-env NODE_ENV=production webpack --config config/webpack/client",
     "prod:build": "npm run remove:build && npm-run-all --parallel prod:build:*",
     "prod": "npm run prod:build && npm run start",
-    "start": "node server/index.js"
+    "start": "node ./server/index.js"
   },
   "author": "steve barton",
   "license": "ISC",

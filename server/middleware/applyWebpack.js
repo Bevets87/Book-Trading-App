@@ -35,7 +35,7 @@ module.exports = (app) => {
       app.use(express.static(clientConfig.output.path))
       app.use(serverRenderer({ clientStats }))
       app.use(catchAllErrorware)
-      app.listen(config.port, () => { logger.info(`listening on port ${config.port}`) })
+      app.listen(process.env.NODE_ENV || config.port, () => { logger.info(`listening on port ${config.port}`) })
     })
   }
 }
