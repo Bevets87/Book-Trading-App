@@ -37,13 +37,11 @@ module.exports = (app) => {
     runInDevelopment(app, done)
   } else {
     const serverRenderer = require('../../dist/serverRenderer.bundle.js').default
-    webpack([clientConfig, serverRendererConfig]).run((error, stats) => {
-      const clientStats = stats.toJson().children[0]
-      app.use(express.static(clientConfig.output.path))
-      app.use(serverRenderer({ clientStats }))
-      app.use(catchAllErrorware)
-      done()
-    })
+    const clientStats = require('../../dist/client/stats.json')
+    app.use(express.static(clientConfig.output.path))
+    app.use(serverRenderer({ clientStats }))
+    app.use(catchAllErrorware)
+    done()
   }
 }
 

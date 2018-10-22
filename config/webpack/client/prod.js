@@ -1,5 +1,6 @@
 const path = require('path')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
+const StatsWebpackPlugin = require('stats-webpack-plugin');
 
 //const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
@@ -37,6 +38,9 @@ module.exports = {
     rules: [ imgRules ]
   },
   plugins: [
+    new StatsWebpackPlugin('stats.json', {
+      chunkModules: true
+    }),
     new CompressionWebpackPlugin({
       algorithm: 'gzip'
     })

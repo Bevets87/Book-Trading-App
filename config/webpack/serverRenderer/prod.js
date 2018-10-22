@@ -1,3 +1,5 @@
+const StatsWebpackPlugin = require('stats-webpack-plugin');
+
 const imgRules = {
   test: /\.(png|jpg)$/,
   use: [
@@ -25,5 +27,10 @@ module.exports = {
     rules: [
       imgRules 
     ]
-  }
+  },
+  plugins: [
+    new StatsWebpackPlugin('stats.json', {
+      chunkModules: true
+    })
+  ]
 }
