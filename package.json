@@ -10,12 +10,7 @@
     "prod:build:client": "cross-env NODE_ENV=production webpack --config config/webpack/client",
     "prod:build": "npm run remove:build && npm-run-all --parallel prod:build:*",
     "prod": "npm run prod:build && npm run start",
-    "start": "node ./server/index.js",
-    "test:client": "cross-env NODE_ENV=testing jest --config test/client/jest.config.js --watch test/client --runInBand",
-    "test:api:models": "cross-env NODE_ENV=testing jest --config test/api/jest.config.js --watch test/api/models --runInBand",
-    "test:api:controllers": "cross-env NODE_ENV=testing jest --config test/api/jest.config.js --watch test/api/controllers --runInBand",
-    "test:api:routes": "cross-env NODE_ENV=testing jest --config test/api/jest.config.js --watch test/api/routes --runInBand",
-    "test:api:services": "cross-env NODE_ENV=testing jest --config test/api/jest.config.js --watch test/api/services"
+    "start": "node ./server/index.js"
   },
   "author": "steve barton",
   "license": "ISC",
