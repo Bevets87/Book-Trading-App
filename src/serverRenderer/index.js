@@ -16,6 +16,7 @@ import reducers from '../client/redux/reducers'
 
 export default function serverRenderer({ clientStats }) {
   return async (req, res) => {
+      
       const context = {}
       const styleSheet = new ServerStyleSheet()
       const store = await createStore(req, reducers)

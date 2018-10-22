@@ -1,5 +1,6 @@
 const path = require('path')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
+
 //const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 let __root = process.cwd()

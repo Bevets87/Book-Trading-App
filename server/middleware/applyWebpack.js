@@ -1,10 +1,10 @@
 const express = require('express')
 const logger = require('../logger')
 const catchAllErrorware = require('../errorware/catchAll')
+const config = require('../../config/env')
 const webpack = require('webpack')
 const clientConfig = require('../../config/webpack/client')
 const serverRendererConfig = require('../../config/webpack/serverRenderer')
-const config = require('../../config/env')
 
 const runInDevelopment = (app) => {
   const webpackDevMiddleware = require('webpack-dev-middleware')
@@ -29,13 +29,13 @@ module.exports = (app) => {
   if (process.env.NODE_ENV === 'development') {
     runInDevelopment(app)
   } else {
-    webpack([clientConfig, serverRendererConfig]).run((err, stats) => {
-      const serverRenderer = require('../../dist/serverRenderer.bundle.js').default
+    const serverRenderer = require('../../dist/serverRenderer.bundle.js').default
+    webpack([clientConfig, serverRendererConfig]).run((error, stats) => {
       const clientStats = stats.toJson().children[0]
       app.use(express.static(clientConfig.output.path))
       app.use(serverRenderer({ clientStats }))
       app.use(catchAllErrorware)
-      app.listen(process.env.NODE_ENV || config.port, () => { logger.info(`listening on port ${config.port}`) })
+      app.listen(process.env.NODE_ENV || config.port, () => { logger.info(`listening on port ${process.env.NODE_ENV || config.port}`) })
     })
   }
 }
