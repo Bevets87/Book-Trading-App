@@ -6,7 +6,7 @@ const webpack = require('webpack')
 const clientConfig = require('../../config/webpack/client')
 const serverRendererConfig = require('../../config/webpack/serverRenderer')
 
-const runInDevelopment = (app) => {
+const runInDevelopment = (app, done) => {
   const webpackDevMiddleware = require('webpack-dev-middleware')
   const webpackHotMiddleware = require('webpack-hot-middleware')
   const webpackHotServerMiddleware = require('webpack-hot-server-middleware')
@@ -19,15 +19,22 @@ const runInDevelopment = (app) => {
   app.use(webpackHotServerMiddleware(compiler))
   app.use(catchAllErrorware)
   
-  devMiddleware.waitUntilValid(() => {
-    app.listen(config.port, () => { logger.info(`listening on port ${config.port}`) })
-  })
+  devMiddleware.waitUntilValid(done)
 }
 
 module.exports = (app) => {
+
+  let isBuilt = false
+  const done = () =>
+    !isBuilt &&
+    app.listen(config.port, () => {
+      isBuilt = true 
+      logger.info(`listening on port ${config.port}`) 
+    })
+    
   
   if (process.env.NODE_ENV === 'development') {
-    runInDevelopment(app)
+    runInDevelopment(app, done)
   } else {
     const serverRenderer = require('../../dist/serverRenderer.bundle.js').default
     webpack([clientConfig, serverRendererConfig]).run((error, stats) => {
@@ -35,7 +42,7 @@ module.exports = (app) => {
       app.use(express.static(clientConfig.output.path))
       app.use(serverRenderer({ clientStats }))
       app.use(catchAllErrorware)
-      app.listen(process.env.NODE_ENV, () => { logger.info(`listening on port ${process.env.NODE_ENV}`) })
+      done()
     })
   }
 }
